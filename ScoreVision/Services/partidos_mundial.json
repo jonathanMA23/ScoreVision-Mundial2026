@@ -1,0 +1,151 @@
+[
+  {
+    "equipoLocal": { "id": 5, "nombre": "Argentina", "codigoFIFA": "ARG", "rankingIA": 2 },
+    "equipoVisitante": { "id": 6, "nombre": "Canadá", "codigoFIFA": "CAN", "rankingIA": 49 },
+    "marcadorLocal": 2,
+    "marcadorVisitante": 0,
+    "fecha": "14 Oct",
+    "estadio": "Mercedes-Benz",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "2-0", "probabilidadLocal": 0.80, "probabilidadEmpate": 0.15, "probabilidadVisitante": 0.05,
+      "topGoleadoresEstimados": [
+        { "nombre": "Lautaro Martínez", "golesEstimados": 0.8, "probabilidadGol": 0.65 }
+      ],
+      "factoresClave": ["Strong offense"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 1, "nombre": "México", "codigoFIFA": "MEX", "rankingIA": 10 },
+    "equipoVisitante": { "id": 3, "nombre": "Alemania", "codigoFIFA": "GER", "rankingIA": 7 },
+    "marcadorLocal": 2,
+    "marcadorVisitante": 1,
+    "fecha": "15 Oct",
+    "estadio": "Estadio Azteca",
+    "estado": "LIVE",
+    "prediccionIA": {
+      "posibleResultado": "2-1", "probabilidadLocal": 0.46, "probabilidadEmpate": 0.25, "probabilidadVisitante": 0.29,
+      "topGoleadoresEstimados": [
+        { "nombre": "Santi Giménez", "golesEstimados": 0.7, "probabilidadGol": 0.60 },
+        { "nombre": "Musiala", "golesEstimados": 1.1, "probabilidadGol": 0.75 }
+      ],
+      "factoresClave": ["Home advantage", "Solid defense"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 11, "nombre": "Francia", "codigoFIFA": "FRA", "rankingIA": 1 },
+    "equipoVisitante": { "id": 12, "nombre": "Croacia", "codigoFIFA": "CRO", "rankingIA": 9 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "15 Oct",
+    "estadio": "BC Place",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "2-0", "probabilidadLocal": 0.70, "probabilidadEmpate": 0.20, "probabilidadVisitante": 0.10,
+      "topGoleadoresEstimados": [
+        { "nombre": "Mbappé", "golesEstimados": 1.7, "probabilidadGol": 0.90 },
+        { "nombre": "Griezmann", "golesEstimados": 0.9, "probabilidadGol": 0.70 }
+      ],
+      "factoresClave": ["Pace and Power"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 2, "nombre": "Brasil", "codigoFIFA": "BRA", "rankingIA": 3 },
+    "equipoVisitante": { "id": 4, "nombre": "Japón", "codigoFIFA": "JAP", "rankingIA": 15 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "16 Oct",
+    "estadio": "MetLife Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "3-0", "probabilidadLocal": 0.75, "probabilidadEmpate": 0.15, "probabilidadVisitante": 0.10,
+      "topGoleadoresEstimados": [
+        { "nombre": "Vini Jr.", "golesEstimados": 1.4, "probabilidadGol": 0.85 },
+        { "nombre": "Rodrygo", "golesEstimados": 1.2, "probabilidadGol": 0.80 }
+      ],
+      "factoresClave": ["High possession", "Tiros a Puerta"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 9, "nombre": "USA", "codigoFIFA": "USA", "rankingIA": 11 },
+    "equipoVisitante": { "id": 10, "nombre": "Inglaterra", "codigoFIFA": "ENG", "rankingIA": 4 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "17 Oct",
+    "estadio": "AT&T Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-2", "probabilidadLocal": 0.25, "probabilidadEmpate": 0.30, "probabilidadVisitante": 0.45,
+      "topGoleadoresEstimados": [
+        { "nombre": "Harry Kane", "golesEstimados": 1.3, "probabilidadGol": 0.82 },
+        { "nombre": "Pulisic", "golesEstimados": 0.6, "probabilidadGol": 0.55 }
+      ],
+      "factoresClave": ["Midfield control"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 13, "nombre": "España", "codigoFIFA": "ESP", "rankingIA": 6 },
+    "equipoVisitante": { "id": 14, "nombre": "Italia", "codigoFIFA": "ITA", "rankingIA": 8 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "18 Oct",
+    "estadio": "SoFi Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-1", "probabilidadLocal": 0.40, "probabilidadEmpate": 0.35, "probabilidadVisitante": 0.25,
+      "topGoleadoresEstimados": [
+        { "nombre": "Morata", "golesEstimados": 0.7, "probabilidadGol": 0.60 }
+      ],
+      "factoresClave": ["Tactical discipline"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 15, "nombre": "Portugal", "codigoFIFA": "POR", "rankingIA": 5 },
+    "equipoVisitante": { "id": 16, "nombre": "Uruguay", "codigoFIFA": "URU", "rankingIA": 14 },
+    "marcadorLocal": 2,
+    "marcadorVisitante": 0,
+    "fecha": "13 Oct",
+    "estadio": "BMO Field",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "2-1", "probabilidadLocal": 0.65, "probabilidadEmpate": 0.20, "probabilidadVisitante": 0.15,
+      "topGoleadoresEstimados": [
+        { "nombre": "Cristiano Ronaldo", "golesEstimados": 1.5, "probabilidadGol": 0.88 }
+      ],
+      "factoresClave": ["Counter-attack speed"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 17, "nombre": "Bélgica", "codigoFIFA": "BEL", "rankingIA": 12 },
+    "equipoVisitante": { "id": 18, "nombre": "Países Bajos", "codigoFIFA": "NED", "rankingIA": 13 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "19 Oct",
+    "estadio": "Gillette Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "2-2", "probabilidadLocal": 0.35, "probabilidadEmpate": 0.30, "probabilidadVisitante": 0.35,
+      "topGoleadoresEstimados": [
+        { "nombre": "Lukaku", "golesEstimados": 1.0, "probabilidadGol": 0.70 },
+        { "nombre": "Depay", "golesEstimados": 0.9, "probabilidadGol": 0.68 }
+      ],
+      "factoresClave": ["Attacking full-backs"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 19, "nombre": "Marruecos", "codigoFIFA": "MAR", "rankingIA": 22 },
+    "equipoVisitante": { "id": 20, "nombre": "Senegal", "codigoFIFA": "SEN", "rankingIA": 18 },
+    "marcadorLocal": 1,
+    "marcadorVisitante": 0,
+    "fecha": "12 Oct",
+    "estadio": "Levi's Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "1-0", "probabilidadLocal": 0.50, "probabilidadEmpate": 0.30, "probabilidadVisitante": 0.20,
+      "topGoleadoresEstimados": [
+        { "nombre": "En-Nesyri", "golesEstimados": 0.6, "probabilidadGol": 0.55 }
+      ],
+      "factoresClave": ["Defensive organization"]
+    }
+  }
+]

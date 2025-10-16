@@ -1,10 +1,3 @@
-//
-//  ScoreVisionApp.swift
-//  ScoreVision
-//
-//  Created by Danna Paola Alcantara on 14/10/25.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -25,8 +18,8 @@ struct ScoreVisionApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView()
+                .modelContainer(sharedModelContainer) 
         }
-        .modelContainer(sharedModelContainer)
     }
 }

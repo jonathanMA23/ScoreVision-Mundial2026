@@ -1,40 +1,47 @@
 import SwiftUI
 
-struct LaunchView: View {
+struct SplashView: View {
+    @State private var isActive = false
+    @State private var scale: CGFloat = 0.8
+    @State private var opacity = 0.5
+
     var body: some View {
-        ZStack {
-            // Dark background color
-            Color(red: 22 / 255, green: 48 / 255, blue: 59 / 255)
-                .ignoresSafeArea()
-            
-            VStack(spacing: 20) {
-                // Your logo image from Assets
-                Image("logo")
+        if isActive {
+            ContentView() // Cambia esto por tu vista principal
+        } else {
+            VStack {
+                Image("Image") // agrega tu logo en Assets.xcassets
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 150, height: 150)
-                
-                // App Name
-                Text("ScoreVision")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color(red: 54 / 255, green: 222 / 255, blue: 184 / 255))
-                
-                // Loading Indicator
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                
-                // Loaading Text
-                Text("Cargando...")
-                    .foregroundColor(.white.opacity(0.8))
+                    .scaledToFit()
+                    .frame(width: 180, height: 180)
+                    .scaleEffect(scale)
+                    .opacity(opacity)
+                    .onAppear {
+                        withAnimation(.easeIn(duration: 1.2)) {
+                            self.scale = 1.0
+                            self.opacity = 1.0
+                        }
+                    }
+
+                Text("Cargando... ")
+                    .font(.largeTitle.bold())
+                    .foregroundColor(.mint)
+                    .opacity(opacity)
+                    .onAppear {
+                        withAnimation(.easeIn(duration: 1.2).delay(0.3)) {
+                            self.opacity = 1.0
+                        }
+                    }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.black.ignoresSafeArea())
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    withAnimation {
+                        self.isActive = true
+                    }
+                }
             }
         }
     }
 }
-
-struct LaunchView_Previews: PreviewProvider {
-    static var previews: some View {
-        LaunchView()
-    }
-}
-
