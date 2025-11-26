@@ -25,8 +25,11 @@ struct PartidosView: View {
                     if let livePartido = viewModel.partidoEnVivo, viewModel.filtroSeleccionado == .hoy {
                         Section {
                             // Usamos el nuevo diseño de tarjeta
-                            PartidoCardView(partido: livePartido)
-                        } header: {
+                            NavigationLink(destination: DetallePartidoView(partido: livePartido)) {
+                                PartidoCardView(partido: livePartido)
+                            }
+                        }
+                        header: {
                             HStack(spacing: 4) {
                                 Image(systemName: "record.circle.fill")
                                 Text("En Vivo")
@@ -47,7 +50,7 @@ struct PartidosView: View {
                                 .padding()
                         } else {
                             ForEach(viewModel.partidosFiltrados.filter { $0.estado != .enVivo }) { partido in
-                                NavigationLink(destination: Text("Detalle para \(partido.equipoLocal.nombre)")) {
+                                NavigationLink(destination: DetallePartidoView(partido: partido)) { // <--- AQUÍ ESTÁ EL CAMBIO
                                     PartidoCardView(partido: partido)
                                 }
                             }

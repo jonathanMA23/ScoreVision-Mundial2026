@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DFD8A4232ED6E271005FC776 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DFD8A4222ED6E271005FC776 /* Kingfisher */; };
+		DFD8A4262ED6E425005FC776 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DFD8A4252ED6E425005FC776 /* Lottie */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		DFDABDFD2E9F5802009DD1AD /* ScoreVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoreVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +28,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFD8A4232ED6E271005FC776 /* Kingfisher in Frameworks */,
+				DFD8A4262ED6E425005FC776 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +72,8 @@
 			);
 			name = ScoreVision;
 			packageProductDependencies = (
+				DFD8A4222ED6E271005FC776 /* Kingfisher */,
+				DFD8A4252ED6E425005FC776 /* Lottie */,
 			);
 			productName = ScoreVision;
 			productReference = DFDABDFD2E9F5802009DD1AD /* ScoreVision.app */;
@@ -78,7 +87,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2600;
-				LastUpgradeCheck = 2600;
+				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					DFDABDFC2E9F5802009DD1AD = {
 						CreatedOnToolsVersion = 26.0.1;
@@ -94,6 +103,10 @@
 			);
 			mainGroup = DFDABDF42E9F5801009DD1AD;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DFD8A4212ED6E271005FC776 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				DFD8A4242ED6E425005FC776 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DFDABDFE2E9F5802009DD1AD /* Products */;
 			projectDirPath = "";
@@ -159,6 +172,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5AAC4R2M5B;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -182,6 +196,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -221,6 +236,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 5AAC4R2M5B;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -237,6 +253,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
@@ -248,6 +265,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 5AAC4R2M5B;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -292,6 +310,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 5AAC4R2M5B;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -351,6 +370,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DFD8A4212ED6E271005FC776 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.2;
+			};
+		};
+		DFD8A4242ED6E425005FC776 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DFD8A4222ED6E271005FC776 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFD8A4212ED6E271005FC776 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		DFD8A4252ED6E425005FC776 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFD8A4242ED6E425005FC776 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DFDABDF52E9F5801009DD1AD /* Project object */;
 }
