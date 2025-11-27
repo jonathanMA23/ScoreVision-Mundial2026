@@ -91,7 +91,7 @@
       "probabilidadEmpate": 0.28,
       "probabilidadVisitante": 0.36,
       "topGoleadoresEstimados": [
-        { "nombre": "Kane", "golesEstimados": 1.1, "probabilidadGol": 0.79 }
+        { "nombre": "Gakpo", "golesEstimados": 1.1, "probabilidadGol": 0.79 }
       ],
       "factoresClave": ["Control de mediocampo", "Centros"]
     }
@@ -168,7 +168,7 @@
       "probabilidadEmpate": 0.30,
       "probabilidadVisitante": 0.30,
       "topGoleadoresEstimados": [
-        { "nombre": "Mendy", "golesEstimados": 0.7, "probabilidadGol": 0.59 }
+        { "nombre": "Mené", "golesEstimados": 0.7, "probabilidadGol": 0.59 }
       ],
       "factoresClave": ["Defensa compacta", "Contrataques"]
     }

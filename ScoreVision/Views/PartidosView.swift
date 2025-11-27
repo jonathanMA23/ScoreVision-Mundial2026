@@ -4,8 +4,9 @@ import Combine
 
 // MARK: - Vista Principal de Partidos
 struct PartidosView: View {
-    // ViewModel simulado que carga tus datos JSON
     @StateObject var viewModel = PartidosViewModel()
+    @State private var filtroSeleccionado = "Hoy" // Estado para el filtro
+    let categorias = ["Hoy", "Próximos", "Terminados"]
     
     var body: some View {
         NavigationView {
@@ -34,48 +35,103 @@ struct PartidosView: View {
                         .padding(.horizontal)
                         .padding(.top, 10)
                         
-                        // --- Filtros de Fecha ---
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 15) {
-                                ForEach(["Hoy", "Proximos", "Terminados", ], id: \.self) { dia in
-                                    Text(dia)
+                        // --- Filtros de Categoría (Estilo Cápsula) ---
+                        HStack(spacing: 12) {
+                            ForEach(categorias, id: \.self) { categoria in
+                                Button(action: {
+                                    withAnimation { filtroSeleccionado = categoria }
+                                }) {
+                                    Text(categoria)
                                         .font(.system(size: 14, weight: .bold))
-                                        .foregroundColor(dia == "Hoy" ? .black : .white)
-                                        .padding(.vertical, 8)
-                                        .padding(.horizontal, 20)
-                                        .background(dia == "Hoy" ? Color.green : Color.white.opacity(0.1))
+                                        .foregroundColor(filtroSeleccionado == categoria ? .black : .white)
+                                        .padding(.vertical, 10)
+                                        .padding(.horizontal, 24)
+                                        .background(
+                                            filtroSeleccionado == categoria ? Color.green : Color.white.opacity(0.1)
+                                        )
                                         .clipShape(Capsule())
                                 }
                             }
-                            .padding(.horizontal)
+                            Spacer()
                         }
+                        .padding(.horizontal)
                         
-                        // --- Partido Destacado (En Vivo) ---
-                        // Buscamos el primer partido que esté "LIVE" o "En Vivo"
-                        if let vivo = viewModel.partidos.first(where: { $0.estado == .enVivo }) {
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Circle().fill(Color.red).frame(width: 8, height: 8)
-                                        .shadow(color: .red, radius: 5)
-                                    Text("PARTIDO DESTACADO").font(.caption).bold().foregroundColor(.white)
+                        // --- LÓGICA DE VISUALIZACIÓN ---
+                        
+                        // 1. Sección HOY (Incluye Destacado + Lista)
+                        if filtroSeleccionado == "Hoy" {
+                            // Identificamos el partido destacado (En Vivo) para no repetirlo
+                            let destacado = viewModel.partidos.first(where: { $0.estado == .enVivo })
+                            
+                            // Mostrar Tarjeta Destacada si existe
+                            if let vivo = destacado {
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Circle().fill(Color.red).frame(width: 8, height: 8)
+                                            .shadow(color: .red, radius: 5)
+                                        Text("PARTIDO DESTACADO").font(.caption).bold().foregroundColor(.white)
+                                    }
+                                    .padding(.horizontal)
+                                    
+                                    NavigationLink(destination: DetallePartidoView(partido: vivo)) {
+                                        FeaturedMatchCard(partido: vivo)
+                                    }
                                 }
-                                .padding(.horizontal)
+                            }
+                            
+                            // Lista de Hoy
+                            VStack(alignment: .leading, spacing: 15) {
+                                Text("Calendario").font(.headline).foregroundColor(.gray).padding(.horizontal)
                                 
-                                NavigationLink(destination: DetallePartidoView(partido: vivo)) {
-                                    FeaturedMatchCard(partido: vivo)
+                                // Filtramos los partidos de hoy y EXCLUIMOS el destacado comparando IDs (UUIDs)
+                                let partidosHoy = viewModel.partidos.filter { partido in
+                                    let esDeHoy = (partido.estado == .enVivo || partido.fecha == "12 Jun")
+                                    // Si hay destacado, filtramos para no mostrar el mismo ID. Si no hay, mostramos todo.
+                                    let noEsDestacado = partido.id != destacado?.id
+                                    return esDeHoy && noEsDestacado
+                                }
+                                
+                                if partidosHoy.isEmpty {
+                                    EmptyStateView(mensaje: "No hay más partidos hoy")
+                                } else {
+                                    ForEach(partidosHoy) { partido in
+                                        NavigationLink(destination: DetallePartidoView(partido: partido)) {
+                                            MatchRowCard(partido: partido)
+                                        }
+                                    }
                                 }
                             }
                         }
                         
-                        // --- Lista de Partidos (Resto) ---
-                        VStack(alignment: .leading, spacing: 15) {
-                            Text("Calendario").font(.headline).foregroundColor(.gray).padding(.horizontal)
-                            
-                            ForEach(viewModel.partidos) { partido in
-                                // Mostramos todos los que NO sean el destacado en vivo (para no repetir)
-                                if partido.estado != .enVivo {
-                                    NavigationLink(destination: DetallePartidoView(partido: partido)) {
-                                        MatchRowCard(partido: partido)
+                        // 2. Sección PRÓXIMOS
+                        else if filtroSeleccionado == "Próximos" {
+                            VStack(alignment: .leading, spacing: 15) {
+                                let proximos = viewModel.partidos.filter { $0.estado == .proximo }
+                                
+                                if proximos.isEmpty {
+                                    EmptyStateView(mensaje: "No hay partidos próximos programados")
+                                } else {
+                                    ForEach(proximos) { partido in
+                                        NavigationLink(destination: DetallePartidoView(partido: partido)) {
+                                            MatchRowCard(partido: partido)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        // 3. Sección TERMINADOS
+                        else if filtroSeleccionado == "Terminados" {
+                            VStack(alignment: .leading, spacing: 15) {
+                                let terminados = viewModel.partidos.filter { $0.estado == .finalizado }
+                                
+                                if terminados.isEmpty {
+                                    EmptyStateView(mensaje: "Aún no hay partidos finalizados")
+                                } else {
+                                    ForEach(terminados) { partido in
+                                        NavigationLink(destination: DetallePartidoView(partido: partido)) {
+                                            MatchRowCard(partido: partido)
+                                        }
                                     }
                                 }
                             }
@@ -90,20 +146,38 @@ struct PartidosView: View {
     }
 }
 
-// MARK: - Componentes Visuales
+// --- Vista para estados vacíos ---
+struct EmptyStateView: View {
+    let mensaje: String
+    var body: some View {
+        VStack(spacing: 10) {
+            Image(systemName: "sportscourt")
+                .font(.system(size: 40))
+                .foregroundColor(.gray.opacity(0.3))
+            Text(mensaje)
+                .foregroundColor(.gray)
+                .font(.subheadline)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 40)
+    }
+}
 
-// Componente: Tarjeta Destacada (Grande)
+// MARK: - Componentes Visuales (Tarjetas)
+
 struct FeaturedMatchCard: View {
     let partido: Partido
     
     var body: some View {
         VStack(spacing: 20) {
             HStack {
+                // Local
                 VStack {
                     BanderaView(nombre: partido.equipoLocal.nombre, size: 60)
                     Text(partido.equipoLocal.codigoFIFA).font(.headline).bold().foregroundColor(.white)
                 }
                 Spacer()
+                // Marcador Central
                 VStack {
                     if let loc = partido.marcadorLocal, let vis = partido.marcadorVisitante {
                         Text("\(loc) - \(vis)")
@@ -114,11 +188,11 @@ struct FeaturedMatchCard: View {
                             .font(.system(size: 30, weight: .bold))
                             .foregroundColor(.gray)
                     }
-                    
-                    Text(partido.fecha) // Minuto o Fecha
+                    Text(partido.fecha)
                         .font(.caption).bold().foregroundColor(.green)
                 }
                 Spacer()
+                // Visitante
                 VStack {
                     BanderaView(nombre: partido.equipoVisitante.nombre, size: 60)
                     Text(partido.equipoVisitante.codigoFIFA).font(.headline).bold().foregroundColor(.white)
@@ -143,13 +217,12 @@ struct FeaturedMatchCard: View {
     }
 }
 
-// Componente: Fila de Partido (Pequeña)
 struct MatchRowCard: View {
     let partido: Partido
     
     var body: some View {
         HStack(spacing: 15) {
-            // Hora/Estado
+            // Fecha / Estado Izquierda
             VStack {
                 Text(partido.fecha)
                     .font(.caption).bold()
@@ -197,7 +270,6 @@ struct MatchRowCard: View {
     }
 }
 
-// Helper rápido para banderas
 struct BanderaView: View {
     let nombre: String
     let size: CGFloat

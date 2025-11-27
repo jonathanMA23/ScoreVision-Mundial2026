@@ -1,61 +1,27 @@
 import SwiftUI
 import Charts
 import Lottie
-import Kingfisher
+import Kingfisher // 1. IMPORTANTE: Importamos Kingfisher para gestión de imágenes
 
 struct DetallePartidoView: View {
+    // Recibimos el modelo real
     let partido: Partido
     
     @Environment(\.presentationMode) var presentationMode
     @State private var tabSeleccionada = "Resumen"
-    @Namespace private var animation
+    @Namespace private var animation // Namespace para animaciones suaves
+    
+    // Estado para activar animaciones de Lottie
     @State private var mostrarCelebracion = false
-    
-    // --- LÓGICA DINÁMICA: Generar gráficos basados en el JSON del partido ---
-    
-    // 1. Momentum: Basado en la probabilidad de victoria
-    // Si probabilidadLocal es alta, la gráfica se inclina hacia arriba (verde).
-    var momentumData: [MatchMomentumPoint] {
-        let bias = (partido.prediccionIA.probabilidadLocal - 0.5) * 100 // Sesgo hacia local o visita
-        
-        // Usamos el ID del partido para que la "aleatoriedad" sea consistente siempre para el mismo partido
-        var generator = SeededGenerator(seed: UInt64(partido.id.hashValue))
-        
-        return (0..<15).map { i in
-            // Base aleatoria + el sesgo de la IA
-            let randomValue = Double.random(in: -30...30, using: &generator)
-            let trend = bias * (Double(i) / 15.0) // El dominio suele aumentar con el tiempo
-            return MatchMomentumPoint(minute: i * 6, strength: randomValue + trend)
-        }
-    }
-    
-    // 2. Estadísticas: Derivadas de la probabilidad IA
-    var statsComparison: [MatchStatComparison] {
-        let probLocal = partido.prediccionIA.probabilidadLocal
-        
-        // Simulación inteligente basada en quién es favorito
-        let xGLocal = 1.2 + (probLocal * 1.5) // Entre 1.2 y 2.7
-        let xGVisitante = 1.2 + (partido.prediccionIA.probabilidadVisitante * 1.5)
-        
-        let posesionLocal = 35.0 + (probLocal * 30.0) // Entre 35% y 65% base + varianza
-        let posesionVisitante = 100.0 - posesionLocal
-        
-        let pasesLocal = posesionLocal * 5.5 // Aprox 5.5 pases por % de posesión
-        let pasesVisitante = posesionVisitante * 5.5
-        
-        return [
-            MatchStatComparison(metric: "Goles Esp. (xG)", localValue: xGLocal, visitValue: xGVisitante, maxScale: 3.5),
-            MatchStatComparison(metric: "Posesión %", localValue: posesionLocal, visitValue: posesionVisitante, maxScale: 100),
-            MatchStatComparison(metric: "Pases", localValue: pasesLocal, visitValue: pasesVisitante, maxScale: 600)
-        ]
-    }
     
     var body: some View {
         ZStack {
-            Color(red: 2/255, green: 6/255, blue: 23/255).ignoresSafeArea()
+            // 1. Fondo "Slate 950"
+            Color(red: 2/255, green: 6/255, blue: 23/255)
+                .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                // Navegación
+                // 2. Barra de Navegación Personalizada
                 HStack {
                     Button(action: { presentationMode.wrappedValue.dismiss() }) {
                         Image(systemName: "chevron.left")
@@ -65,11 +31,19 @@ struct DetallePartidoView: View {
                             .background(Color.white.opacity(0.1))
                             .clipShape(Circle())
                     }
+                    
                     Spacer()
                     Text(partido.estadio.uppercased())
-                        .font(.caption).fontWeight(.black).tracking(2).foregroundColor(.gray)
+                        .font(.caption)
+                        .fontWeight(.black)
+                        .tracking(2)
+                        .foregroundColor(.gray)
+                        .lineLimit(1)
                     Spacer()
-                    Button(action: { withAnimation { mostrarCelebracion.toggle() } }) {
+                    
+                    Button(action: {
+                        withAnimation { mostrarCelebracion.toggle() }
+                    }) {
                         Image(systemName: "square.and.arrow.up")
                             .font(.system(size: 18, weight: .bold))
                             .foregroundColor(.white)
@@ -78,59 +52,69 @@ struct DetallePartidoView: View {
                             .clipShape(Circle())
                     }
                 }
-                .padding(.horizontal).padding(.top, 10)
+                .padding(.horizontal)
+                .padding(.top, 10)
                 
-                ScrollView(.vertical, showsIndicators: false) {
+                ScrollView {
                     VStack(spacing: 24) {
+                        // 3. Marcador Dinámico con Kingfisher
                         MarcadorDinamicoView(partido: partido)
                         
-                        // Tabs
+                        // 4. Pestañas
                         TabsView(seleccion: $tabSeleccionada, animation: animation)
                         
-                        // --- CONTENIDO DINÁMICO DE PESTAÑAS ---
+                        // 5. Contenido Cambiante
                         if tabSeleccionada == "Resumen" {
-                            ResumenDinamicoView() // Timeline Vertical
-                        }
-                        else if tabSeleccionada == "Alineación" {
-                            AlineacionView() // Cancha de Fútbol
-                        }
-                        else if tabSeleccionada == "Estadísticas" {
-                            // Pasamos los datos calculados dinámicamente
-                            StatsAvanzadasView(momentumData: momentumData, stats: statsComparison)
-                        }
-                        else if tabSeleccionada == "IA Vision" {
+                            ResumenDinamicoView(partido: partido)
+                        } else if tabSeleccionada == "IA Vision" {
                             IAVisionView(prediccion: partido.prediccionIA)
+                        } else {
+                            VStack {
+                                LottieView(filename: "loading_animation", loopMode: .loop)
+                                    .frame(width: 150, height: 150)
+                                Text("Próximamente")
+                                    .foregroundColor(.gray)
+                            }
+                            .padding(.top, 40)
                         }
                     }
                     .padding(.top, 20)
-                    .padding(.bottom, 40)
                 }
             }
             
-            // Botón Flotante (Solo si no estamos en IA Vision)
+            // Botón Flotante (Call to Action)
             if tabSeleccionada != "IA Vision" {
                 VStack {
                     Spacer()
                     Button(action: { withAnimation { tabSeleccionada = "IA Vision" } }) {
                         HStack {
                             Image(systemName: "bolt.fill")
-                            Text("Ver Análisis IA ScoreVision").fontWeight(.bold)
+                            Text("Ver Análisis IA ScoreVision")
+                                .fontWeight(.bold)
                         }
-                        .frame(maxWidth: .infinity).padding()
-                        .background(LinearGradient(colors: [Color.purple, Color.blue], startPoint: .leading, endPoint: .trailing))
-                        .foregroundColor(.white).cornerRadius(16)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(
+                            LinearGradient(colors: [Color.purple, Color.blue], startPoint: .leading, endPoint: .trailing)
+                        )
+                        .foregroundColor(.white)
+                        .cornerRadius(16)
                         .shadow(color: Color.purple.opacity(0.5), radius: 10, x: 0, y: 5)
                     }
-                    .padding(.horizontal).padding(.bottom, 20)
+                    .padding(.horizontal)
+                    .padding(.bottom, 20)
                 }
             }
             
+            // OVERLAY: Animación de Celebración
             if mostrarCelebracion {
                 LottieView(filename: "confetti", loopMode: .playOnce)
                     .ignoresSafeArea()
                     .allowsHitTesting(false)
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { mostrarCelebracion = false }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            mostrarCelebracion = false
+                        }
                     }
             }
         }
@@ -138,335 +122,158 @@ struct DetallePartidoView: View {
     }
 }
 
-// MARK: - GENERADOR DE ALEATORIEDAD CONSISTENTE
-// Esto permite que los gráficos sean "aleatorios" pero siempre iguales para el mismo partido
-struct SeededGenerator: RandomNumberGenerator {
-    var state: UInt64
+// MARK: - Subvistas
+
+struct MarcadorDinamicoView: View {
+    let partido: Partido
     
-    init(seed: UInt64) {
-        self.state = seed
-    }
-    
-    mutating func next() -> UInt64 {
-        state = 6364136223846793005 &* state &+ 1442695040888963407
-        return state
+    var body: some View {
+        VStack {
+            // Tiempo / Estado
+            HStack(spacing: 4) {
+                if partido.estado == .enVivo {
+                    Circle().fill(Color.green).frame(width: 8, height: 8)
+                    Text("EN VIVO • \(partido.fecha)")
+                        .font(.caption).fontWeight(.bold).foregroundColor(.green)
+                } else {
+                    Text(partido.estado.rawValue.uppercased())
+                        .font(.caption).fontWeight(.bold).foregroundColor(.gray)
+                }
+            }
+            .padding(.bottom, 20)
+            
+            HStack(alignment: .center) {
+                // Local
+                EquipoColumn(nombre: partido.equipoLocal.nombre)
+                
+                // Marcador Central
+                if let local = partido.marcadorLocal, let visita = partido.marcadorVisitante {
+                    Text("\(local):\(visita)")
+                        .font(.system(size: 64, weight: .black))
+                        .foregroundColor(.white)
+                        .padding(.bottom, 30)
+                } else {
+                    Text("VS")
+                        .font(.system(size: 40, weight: .black))
+                        .foregroundColor(.gray)
+                        .padding(.bottom, 30)
+                }
+                
+                // Visitante
+                EquipoColumn(nombre: partido.equipoVisitante.nombre)
+            }
+        }
     }
 }
 
-// MARK: - 1. RESUMEN: LÍNEA DE TIEMPO (Timeline)
+struct EquipoColumn: View {
+    let nombre: String
+    
+    // Generamos una URL simulada basada en el nombre para la demo
+    // En producción usarías: URL(string: equipo.urlBandera)
+    var urlSimulada: URL? {
+        // Usamos ui-avatars para generar un escudo con las iniciales y colores aleatorios
+        let formattedName = nombre.replacingOccurrences(of: " ", with: "+")
+        return URL(string: "https://ui-avatars.com/api/?name=\(formattedName)&background=random&color=fff&size=128&rounded=true&bold=true")
+    }
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            ZStack {
+                Circle()
+                    .stroke(Color.gray.opacity(0.3), lineWidth: 4)
+                    .frame(width: 80, height: 80)
+                
+                // --- IMPLEMENTACIÓN DE KINGFISHER ---
+                KFImage(urlSimulada)
+                    .placeholder {
+                        // Lo que se muestra mientras carga
+                        ProgressView()
+                            .tint(.white)
+                    }
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 45)
+                    .clipShape(Circle()) // Forzamos forma circular
+                    .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
+            }
+            Text(nombre)
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+    }
+}
+
 struct ResumenDinamicoView: View {
-    // Datos simulados de eventos para la timeline
-    struct EventoPartido: Identifiable {
+    let partido: Partido
+    
+    // Datos simulados para el gráfico
+    struct MomentumData: Identifiable {
         let id = UUID()
         let minuto: Int
-        let tipo: TipoEvento
-        let jugador: String
-        let descripcion: String? // Para cambios (entra/sale)
-        let esLocal: Bool // True = Izquierda, False = Derecha
-        
-        enum TipoEvento { case gol, tarjetaAmarilla, tarjetaRoja, cambio, medioTiempo, inicio }
+        let valor: Int
+        let esLocal: Bool
     }
     
-    let eventos: [EventoPartido] = [
-        EventoPartido(minuto: 90, tipo: .tarjetaAmarilla, jugador: "E. Álvarez", descripcion: nil, esLocal: true),
-        EventoPartido(minuto: 82, tipo: .cambio, jugador: "R. Jiménez", descripcion: "Entra por H. Martin", esLocal: true),
-        EventoPartido(minuto: 75, tipo: .gol, jugador: "L. Sané", descripcion: nil, esLocal: false),
-        EventoPartido(minuto: 68, tipo: .tarjetaRoja, jugador: "A. Rüdiger", descripcion: nil, esLocal: false),
-        EventoPartido(minuto: 51, tipo: .gol, jugador: "H. Lozano", descripcion: nil, esLocal: true),
-        EventoPartido(minuto: 45, tipo: .medioTiempo, jugador: "", descripcion: "HT 1-0", esLocal: true),
-        EventoPartido(minuto: 23, tipo: .gol, jugador: "S. Giménez", descripcion: nil, esLocal: true),
-        EventoPartido(minuto: 0, tipo: .inicio, jugador: "", descripcion: "Inicio del Partido", esLocal: true)
-    ]
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            ForEach(eventos) { evento in
-                HStack(alignment: .top, spacing: 0) {
-                    // LADO IZQUIERDO (LOCAL)
-                    if evento.esLocal && evento.tipo != .medioTiempo && evento.tipo != .inicio {
-                        EventoCard(evento: evento, alignRight: true)
-                    } else {
-                        Spacer()
-                    }
-                    
-                    // LÍNEA CENTRAL
-                    ZStack {
-                        Rectangle()
-                            .fill(Color.gray.opacity(0.3))
-                            .frame(width: 2)
-                        
-                        Circle()
-                            .fill(colorParaEvento(evento.tipo))
-                            .frame(width: 28, height: 28)
-                            .overlay(
-                                Text(evento.tipo == .medioTiempo || evento.tipo == .inicio ? "" : "\(evento.minuto)'")
-                                    .font(.system(size: 10, weight: .bold))
-                                    .foregroundColor(.black)
-                            )
-                            .overlay(
-                                Circle().stroke(Color.black, lineWidth: 2)
-                            )
-                        
-                        if evento.tipo == .medioTiempo || evento.tipo == .inicio {
-                            Image(systemName: evento.tipo == .medioTiempo ? "clock" : "whistle")
-                                .font(.caption2)
-                                .foregroundColor(.black)
-                        }
-                    }
-                    .frame(width: 40)
-                    .padding(.bottom, 20) // Espacio entre eventos
-                    
-                    // LADO DERECHO (VISITANTE)
-                    if !evento.esLocal && evento.tipo != .medioTiempo && evento.tipo != .inicio {
-                        EventoCard(evento: evento, alignRight: false)
-                    } else {
-                        Spacer()
-                    }
-                }
-                
-                // Bloques especiales centrales (HT, Inicio)
-                if evento.tipo == .medioTiempo || evento.tipo == .inicio {
-                    Text(evento.descripcion ?? "")
-                        .font(.caption).bold()
-                        .padding(.vertical, 4).padding(.horizontal, 12)
-                        .background(Color.white.opacity(0.1))
-                        .cornerRadius(10)
-                        .foregroundColor(.gray)
-                        .offset(y: -10) // Subir un poco para pegar al icono
-                        .padding(.bottom, 20)
-                }
-            }
-        }
-        .padding(.horizontal)
+    let datosGrafico: [MomentumData] = (0..<15).map { i in
+        MomentumData(minuto: i * 6, valor: Int.random(in: 30...90), esLocal: Bool.random())
     }
-    
-    func colorParaEvento(_ tipo: EventoPartido.TipoEvento) -> Color {
-        switch tipo {
-        case .gol: return .green
-        case .tarjetaAmarilla: return .yellow
-        case .tarjetaRoja: return .red
-        case .cambio: return .blue
-        default: return .white
-        }
-    }
-}
-
-struct EventoCard: View {
-    let evento: ResumenDinamicoView.EventoPartido
-    let alignRight: Bool
-    
-    var body: some View {
-        HStack {
-            if alignRight { Spacer() }
-            
-            VStack(alignment: alignRight ? .trailing : .leading, spacing: 4) {
-                HStack {
-                    if alignRight {
-                        Text(evento.jugador).font(.subheadline).bold().foregroundColor(.white)
-                        iconoEvento
-                    } else {
-                        iconoEvento
-                        Text(evento.jugador).font(.subheadline).bold().foregroundColor(.white)
-                    }
-                }
-                
-                if let desc = evento.descripcion {
-                    Text(desc).font(.caption2).foregroundColor(.gray)
-                }
-            }
-            .padding(10)
-            .background(Color.white.opacity(0.05))
-            .cornerRadius(12)
-            
-            if !alignRight { Spacer() }
-        }
-    }
-    
-    var iconoEvento: some View {
-        Group {
-            switch evento.tipo {
-            case .gol: Image(systemName: "soccerball").foregroundColor(.green)
-            case .tarjetaAmarilla: Rectangle().fill(Color.yellow).frame(width: 10, height: 14).cornerRadius(2)
-            case .tarjetaRoja: Rectangle().fill(Color.red).frame(width: 10, height: 14).cornerRadius(2)
-            case .cambio: Image(systemName: "arrow.triangle.2.circlepath").foregroundColor(.blue)
-            default: EmptyView()
-            }
-        }
-    }
-}
-
-// MARK: - 2. ALINEACIÓN: CANCHA DE FÚTBOL
-struct AlineacionView: View {
-    @State private var equipoSeleccionado = 0 // 0: Local, 1: Visitante
-    
-    // Datos simulados de jugadores
-    struct JugadorCancha: Identifiable {
-        let id = UUID()
-        let nombre: String
-        let numero: Int
-        let x: CGFloat // 0 a 1 (posición horizontal relativa)
-        let y: CGFloat // 0 a 1 (posición vertical relativa)
-    }
-    
-    // 4-3-3 para Local
-    let alineacionLocal = [
-        JugadorCancha(nombre: "Ochoa", numero: 13, x: 0.5, y: 0.9),
-        JugadorCancha(nombre: "Sánchez", numero: 3, x: 0.2, y: 0.75),
-        JugadorCancha(nombre: "Montes", numero: 19, x: 0.4, y: 0.8),
-        JugadorCancha(nombre: "Vásquez", numero: 5, x: 0.6, y: 0.8),
-        JugadorCancha(nombre: "Gallardo", numero: 23, x: 0.8, y: 0.75),
-        JugadorCancha(nombre: "Álvarez", numero: 4, x: 0.5, y: 0.6),
-        JugadorCancha(nombre: "Chávez", numero: 18, x: 0.3, y: 0.5),
-        JugadorCancha(nombre: "Romo", numero: 7, x: 0.7, y: 0.5),
-        JugadorCancha(nombre: "Antuna", numero: 15, x: 0.2, y: 0.25),
-        JugadorCancha(nombre: "Giménez", numero: 9, x: 0.5, y: 0.2),
-        JugadorCancha(nombre: "Lozano", numero: 22, x: 0.8, y: 0.25)
-    ]
     
     var body: some View {
         VStack(spacing: 20) {
-            // Selector de Equipo
-            Picker("Equipo", selection: $equipoSeleccionado) {
-                Text("México").tag(0)
-                Text("Alemania").tag(1)
+            // Gráfica de Dominio con Swift Charts
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("MOMENTUM DEL PARTIDO")
+                        .font(.caption).fontWeight(.bold).foregroundColor(.gray)
+                    Spacer()
+                    Image(systemName: "chart.bar.fill").foregroundColor(.purple)
+                }
+                .padding(.bottom, 10)
+                
+                Chart {
+                    ForEach(datosGrafico) { dato in
+                        BarMark(
+                            x: .value("Minuto", dato.minuto),
+                            y: .value("Dominio", dato.valor)
+                        )
+                        .foregroundStyle(dato.esLocal ? Color.green : Color.blue)
+                        .cornerRadius(4)
+                    }
+                }
+                .chartXAxis(.hidden)
+                .chartYAxis(.hidden)
+                .frame(height: 70)
             }
-            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+            .background(Color.white.opacity(0.05))
+            .cornerRadius(16)
             .padding(.horizontal)
             
-            // Cancha
-            ZStack {
-                // Fondo Cancha
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(
-                        LinearGradient(colors: [Color.green.opacity(0.8), Color.green.opacity(0.6)], startPoint: .top, endPoint: .bottom)
-                    )
-                    .overlay(
-                        // Líneas de cancha simples
-                        ZStack {
-                            Rectangle().stroke(Color.white.opacity(0.3), lineWidth: 2)
-                            Circle().stroke(Color.white.opacity(0.3), lineWidth: 2).frame(width: 100)
-                            Rectangle().fill(Color.white.opacity(0.3)).frame(height: 2) // Medio campo
-                        }
-                        .padding(20)
-                    )
-                    .frame(height: 500)
-                    .padding(.horizontal)
-                
-                // Jugadores
-                GeometryReader { geo in
-                    let w = geo.size.width - 32 // ajuste por padding
-                    let h = 500.0
-                    let offsetX: CGFloat = 16
+            // Goleadores Estimados (Si no hay eventos reales)
+            if !partido.prediccionIA.topGoleadoresEstimados.isEmpty {
+                VStack(alignment: .leading) {
+                    Text("Jugadores a Seguir (IA)")
+                        .font(.caption).bold().foregroundColor(.gray).padding(.horizontal)
                     
-                    ForEach(alineacionLocal) { jugador in
-                        VStack(spacing: 2) {
-                            ZStack {
-                                Circle().fill(Color.white).frame(width: 30, height: 30)
-                                    .shadow(radius: 3)
-                                Text("\(jugador.numero)")
-                                    .font(.caption).bold().foregroundColor(.black)
-                            }
-                            Text(jugador.nombre)
-                                .font(.system(size: 10, weight: .bold))
-                                .foregroundColor(.white)
-                                .shadow(color: .black, radius: 2)
-                        }
-                        .position(
-                            x: offsetX + (jugador.x * w),
-                            // Si es visitante, invertimos la Y o usamos otra alineación
-                            y: equipoSeleccionado == 0 ? (jugador.y * h) : ((1 - jugador.y) * h)
+                    ForEach(partido.prediccionIA.topGoleadoresEstimados) { jugador in
+                        // Generamos URL de foto de jugador simulada
+                        let playerUrl = URL(string: "https://ui-avatars.com/api/?name=\(jugador.nombre.replacingOccurrences(of: " ", with: "+"))&background=22c55e&color=fff&size=64&rounded=true")
+                        
+                        EventoRow(
+                            minuto: "IA",
+                            texto: "Alta probabilidad de gol: \(jugador.nombre) (\(Int(jugador.probabilidadGol * 100))%)",
+                            tipo: .info,
+                            imageUrl: playerUrl // Pasamos la URL a la fila
                         )
                     }
                 }
-                .frame(height: 500)
             }
             
-            // Info DT
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Director Técnico").font(.caption).foregroundColor(.gray)
-                    Text(equipoSeleccionado == 0 ? "Jaime Lozano" : "Hansi Flick").font(.headline).foregroundColor(.white)
-                }
-                Spacer()
-                Text(equipoSeleccionado == 0 ? "4-3-3" : "4-2-3-1").font(.title3).bold().foregroundColor(.green)
-            }
-            .padding(.horizontal)
-            .padding(.bottom, 20)
-        }
-    }
-}
-
-// --- SUBVISTAS DE ESTADÍSTICAS Y OTROS ---
-
-struct StatsAvanzadasView: View {
-    // Cambio: Tipos actualizados a MatchMomentumPoint y MatchStatComparison
-    let momentumData: [MatchMomentumPoint]
-    let stats: [MatchStatComparison]
-    
-    var body: some View {
-        VStack(spacing: 20) {
-            // 1. Momentum Chart
-            VStack(alignment: .leading) {
-                Text("MOMENTUM DE JUEGO").font(.caption).bold().foregroundColor(.secondary).padding(.bottom, 8)
-                
-                Chart(momentumData) { point in
-                    AreaMark(
-                        x: .value("Minuto", point.minute),
-                        y: .value("Dominio", point.strength > 0 ? point.strength : 0)
-                    )
-                    .foregroundStyle(LinearGradient(colors: [.green.opacity(0.6), .green.opacity(0.1)], startPoint: .top, endPoint: .bottom))
-                    .interpolationMethod(.catmullRom)
-                    
-                    AreaMark(
-                        x: .value("Minuto", point.minute),
-                        y: .value("Dominio", point.strength < 0 ? point.strength : 0)
-                    )
-                    .foregroundStyle(LinearGradient(colors: [.blue.opacity(0.1), .blue.opacity(0.6)], startPoint: .top, endPoint: .bottom))
-                    .interpolationMethod(.catmullRom)
-                }
-                .frame(height: 150)
-                .chartXAxis { AxisMarks(values: .stride(by: 15)) { AxisValueLabel(format: Decimal.FormatStyle.number) } }
-                .chartYAxis(.hidden)
-                
-                HStack {
-                    Text("Visitante").font(.caption).foregroundColor(.blue)
-                    Spacer()
-                    Text("Local").font(.caption).foregroundColor(.green)
-                }
-            }
-            .padding().background(Color.white.opacity(0.05)).cornerRadius(16).padding(.horizontal)
-            
-            // 2. Comparativa
-            VStack(alignment: .leading, spacing: 16) {
-                Text("COMPARATIVA CLAVE").font(.caption).bold().foregroundColor(.secondary)
-                ForEach(stats) { stat in
-                    VStack(spacing: 6) {
-                        HStack {
-                            Text(String(format: "%.1f", stat.localValue)).font(.caption).bold().foregroundColor(.green)
-                            Spacer()
-                            Text(stat.metric.uppercased()).font(.caption2).fontWeight(.heavy).foregroundColor(.gray)
-                            Spacer()
-                            Text(String(format: "%.1f", stat.visitValue)).font(.caption).bold().foregroundColor(.blue)
-                        }
-                        GeometryReader { geo in
-                            HStack(spacing: 4) {
-                                ZStack(alignment: .trailing) {
-                                    Capsule().fill(Color.gray.opacity(0.1))
-                                    Capsule().fill(Color.green).frame(width: (stat.localValue / stat.maxScale) * (geo.size.width / 2))
-                                }
-                                ZStack(alignment: .leading) {
-                                    Capsule().fill(Color.gray.opacity(0.1))
-                                    Capsule().fill(Color.blue).frame(width: (stat.visitValue / stat.maxScale) * (geo.size.width / 2))
-                                }
-                            }
-                        }.frame(height: 8)
-                    }
-                }
-            }
-            .padding().background(Color.white.opacity(0.05)).cornerRadius(16).padding(.horizontal)
-            
-            // Espacio final
-            Color.clear.frame(height: 60)
+            Color.clear.frame(height: 80)
         }
     }
 }
@@ -476,56 +283,43 @@ struct IAVisionView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            // 1. Tarjeta de Predicción Principal
+            // Tarjeta de Probabilidad
             VStack(alignment: .leading, spacing: 15) {
                 HStack {
-                    Image(systemName: "brain.head.profile")
-                        .foregroundColor(.purple)
-                    Text("PREDICCIÓN SCOREVISION")
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
+                    Image(systemName: "brain.head.profile").foregroundColor(.purple)
+                    Text("PREDICCIÓN SCOREVISION").font(.headline.bold()).foregroundColor(.white)
                 }
                 
                 Text("Resultado probable: \(prediccion.posibleResultado)")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.title2.bold())
                     .foregroundColor(.white)
                 
-                // Barras de Probabilidad
-                VStack(spacing: 16) {
-                    // Local
-                    ProbabilidadRow(label: "Local", valor: prediccion.probabilidadLocal, color: .green)
-                    // Empate
-                    ProbabilidadRow(label: "Empate", valor: prediccion.probabilidadEmpate, color: .gray)
-                    // Visitante
-                    ProbabilidadRow(label: "Visitante", valor: prediccion.probabilidadVisitante, color: .blue)
+                // Barras de porcentaje
+                VStack(spacing: 8) {
+                    HStack { Text("Local").font(.caption).foregroundColor(.gray); Spacer(); Text("\(Int(prediccion.probabilidadLocal * 100))%").font(.caption).foregroundColor(.green) }
+                    ProgressView(value: prediccion.probabilidadLocal).tint(.green)
+                    
+                    HStack { Text("Empate").font(.caption).foregroundColor(.gray); Spacer(); Text("\(Int(prediccion.probabilidadEmpate * 100))%").font(.caption).foregroundColor(.white) }
+                    ProgressView(value: prediccion.probabilidadEmpate).tint(.gray)
+                    
+                    HStack { Text("Visitante").font(.caption).foregroundColor(.gray); Spacer(); Text("\(Int(prediccion.probabilidadVisitante * 100))%").font(.caption).foregroundColor(.blue) }
+                    ProgressView(value: prediccion.probabilidadVisitante).tint(.blue)
                 }
             }
             .padding()
             .background(Color.purple.opacity(0.1))
             .cornerRadius(16)
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.purple.opacity(0.3), lineWidth: 1)
-            )
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.purple.opacity(0.3), lineWidth: 1))
             .padding(.horizontal)
             
-            // 2. Sección de Factores Clave (Restaurada)
+            // Factores Clave
             VStack(alignment: .leading, spacing: 10) {
-                Text("Factores Clave")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding(.horizontal)
+                Text("Factores Clave").font(.headline).foregroundColor(.white).padding(.horizontal)
                 
                 ForEach(prediccion.factoresClave, id: \.self) { factor in
-                    HStack(spacing: 12) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green)
-                            .font(.title3)
-                        Text(factor)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
+                        Text(factor).foregroundColor(.gray)
                         Spacer()
                     }
                     .padding()
@@ -535,29 +329,13 @@ struct IAVisionView: View {
                 }
             }
             
-            // Espacio final
-            Color.clear.frame(height: 60)
+            Color.clear.frame(height: 80)
         }
     }
 }
 
-// --- MODELOS AUXILIARES PARA GRÁFICOS (Renombrados) ---
-// Se renombraron para evitar conflictos con AnalisisViewModel
-struct MatchMomentumPoint: Identifiable {
-    let id = UUID()
-    let minute: Int
-    let strength: Double
-}
+// MARK: - Componentes Auxiliares
 
-struct MatchStatComparison: Identifiable {
-    let id = UUID()
-    let metric: String
-    let localValue: Double
-    let visitValue: Double
-    let maxScale: Double
-}
-
-// --- ACTUALIZACIÓN DE TABSVIEW ---
 struct TabsView: View {
     @Binding var seleccion: String
     var animation: Namespace.ID
@@ -569,13 +347,15 @@ struct TabsView: View {
             ForEach(tabs, id: \.self) { tab in
                 VStack {
                     Text(tab)
-                        .font(.system(size: 13, weight: .medium))
+                        .font(.system(size: 14, weight: .medium))
                         .foregroundColor(seleccion == tab ? .white : .gray)
                         .padding(.bottom, 8)
                     
                     if seleccion == tab {
-                        Rectangle().fill(tab == "IA Vision" ? Color.purple : Color.green)
-                            .frame(height: 3).cornerRadius(1.5)
+                        Rectangle()
+                            .fill(tab == "IA Vision" ? Color.purple : Color.green)
+                            .frame(height: 3)
+                            .cornerRadius(1.5)
                             .matchedGeometryEffect(id: "tabIndicator", in: animation)
                     } else {
                         Rectangle().fill(Color.clear).frame(height: 3)
@@ -583,107 +363,111 @@ struct TabsView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .contentShape(Rectangle())
-                .onTapGesture { withAnimation { seleccion = tab } }
+                .onTapGesture {
+                    withAnimation { seleccion = tab }
+                }
+                .overlay(
+                    tab == "IA Vision" ?
+                        Text("PRO")
+                        .font(.system(size: 8, weight: .bold))
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 2)
+                        .background(Color.purple)
+                        .cornerRadius(4)
+                        .foregroundColor(.white)
+                        .offset(x: 20, y: -15)
+                    : nil
+                )
             }
         }
         .padding(.horizontal)
-        .overlay(Rectangle().frame(height: 1).foregroundColor(Color.gray.opacity(0.2)), alignment: .bottom)
+        .overlay(
+            Rectangle().frame(height: 1).foregroundColor(Color.gray.opacity(0.2)),
+            alignment: .bottom
+        )
     }
 }
 
-// --- SUBVISTAS AUXILIARES ---
-
-struct MarcadorDinamicoView: View {
-    let partido: Partido
-    var body: some View {
-        VStack {
-            HStack(spacing: 4) {
-                if partido.estado == .enVivo {
-                    Circle().fill(Color.green).frame(width: 8, height: 8)
-                    Text("EN VIVO • \(partido.fecha)").font(.caption).fontWeight(.bold).foregroundColor(.green)
-                } else {
-                    Text(partido.estado.rawValue.uppercased()).font(.caption).fontWeight(.bold).foregroundColor(.gray)
-                }
-            }
-            .padding(.bottom, 20)
-            
-            HStack(alignment: .center) {
-                EquipoColumn(nombre: partido.equipoLocal.nombre)
-                if let local = partido.marcadorLocal, let visita = partido.marcadorVisitante {
-                    Text("\(local):\(visita)").font(.system(size: 64, weight: .black)).foregroundColor(.white).padding(.bottom, 30)
-                } else {
-                    Text("VS").font(.system(size: 40, weight: .black)).foregroundColor(.gray).padding(.bottom, 30)
-                }
-                EquipoColumn(nombre: partido.equipoVisitante.nombre)
-            }
-        }
-    }
-}
-
-struct EquipoColumn: View {
-    let nombre: String
-    var urlSimulada: URL? {
-        let formattedName = nombre.replacingOccurrences(of: " ", with: "+")
-        return URL(string: "https://ui-avatars.com/api/?name=\(formattedName)&background=random&color=fff&size=128&rounded=true&bold=true")
-    }
-    var body: some View {
-        VStack(spacing: 8) {
-            ZStack {
-                Circle().stroke(Color.gray.opacity(0.3), lineWidth: 4).frame(width: 80, height: 80)
-                KFImage(urlSimulada).placeholder { ProgressView().tint(.white) }.resizable().aspectRatio(contentMode: .fit).frame(width: 45).clipShape(Circle())
-            }
-            Text(nombre).font(.headline).fontWeight(.bold).foregroundColor(.white).multilineTextAlignment(.center)
-        }
-        .frame(maxWidth: .infinity)
-    }
-}
-
-struct ProbabilidadRow: View {
-    let label: String
-    let valor: Double
-    let color: Color
+struct EventoRow: View {
+    let minuto: String
+    let texto: String
+    let tipo: TipoEvento
+    var imageUrl: URL? = nil // Nuevo parámetro opcional para la imagen
+    
+    enum TipoEvento { case gol, tarjeta, info }
     
     var body: some View {
-        VStack(spacing: 6) {
-            HStack {
-                Text(label)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                Spacer()
-                Text("\(Int(valor * 100))%")
-                    .font(.caption)
-                    .fontWeight(.bold)
-                    .foregroundColor(color)
-            }
-            GeometryReader { geo in
-                ZStack(alignment: .leading) {
-                    Capsule()
-                        .fill(Color.gray.opacity(0.2))
-                        .frame(height: 6)
-                    Capsule()
-                        .fill(color)
-                        .frame(width: geo.size.width * valor, height: 6)
+        HStack(alignment: .top, spacing: 15) {
+            Text(minuto)
+                .font(.custom("Menlo", size: 14))
+                .foregroundColor(.gray)
+                .frame(width: 30, alignment: .trailing)
+                .padding(.top, 4)
+            
+            VStack(alignment: .leading) {
+                HStack {
+                    // Si hay URL, mostramos la imagen con Kingfisher
+                    if let url = imageUrl {
+                        KFImage(url)
+                            .resizable()
+                            .placeholder { Circle().fill(Color.gray.opacity(0.3)) }
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 24, height: 24)
+                            .clipShape(Circle())
+                    }
+                    Text(texto)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
                 }
             }
-            .frame(height: 6)
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(
+                tipo == .gol ? Color.green.opacity(0.1) :
+                tipo == .tarjeta ? Color.blue.opacity(0.1) : Color.white.opacity(0.05)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(
+                        tipo == .gol ? Color.green.opacity(0.3) :
+                        tipo == .tarjeta ? Color.blue.opacity(0.3) : Color.clear,
+                        lineWidth: 1
+                    )
+            )
+            .cornerRadius(12)
         }
+        .padding(.horizontal)
     }
 }
+
+// MARK: - Wrapper de Lottie para SwiftUI
 
 struct LottieView: UIViewRepresentable {
     var filename: String
     var loopMode: LottieLoopMode = .playOnce
     var contentMode: UIView.ContentMode = .scaleAspectFit
-    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView { UIView(frame: .zero) }
+    
+    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
+        let view = UIView(frame: .zero)
+        return view
+    }
+    
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
         uiView.subviews.forEach({ $0.removeFromSuperview() })
+        
         let animationView = LottieAnimationView(name: filename)
         animationView.contentMode = contentMode
         animationView.loopMode = loopMode
         animationView.play()
+        
         animationView.translatesAutoresizingMaskIntoConstraints = false
         uiView.addSubview(animationView)
-        NSLayoutConstraint.activate([animationView.widthAnchor.constraint(equalTo: uiView.widthAnchor), animationView.heightAnchor.constraint(equalTo: uiView.heightAnchor)])
+        
+        NSLayoutConstraint.activate([
+            animationView.widthAnchor.constraint(equalTo: uiView.widthAnchor),
+            animationView.heightAnchor.constraint(equalTo: uiView.heightAnchor)
+        ])
     }
 }
 
