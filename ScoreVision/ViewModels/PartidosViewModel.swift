@@ -63,7 +63,7 @@ class PartidosViewModel: ObservableObject {
     // New logic for Top Goalscorers
     var topGoleadores: [EstimacionJugador] {
         // 1. Get all of today's matches
-        let partidosDeHoy = partidos.filter { $0.estado == .enVivo || ($0.estado == .proximo && $0.fecha == "15 Oct") }
+        let partidosDeHoy = partidos.filter { $0.estado == .enVivo || ($0.estado == .proximo && $0.fecha == "15 Junio") }
         // 2. Get all goalscorer estimates from these matches into a single flat array
         let todosLosGoleadores = partidosDeHoy.flatMap { $0.prediccionIA.topGoleadoresEstimados }
         // 3. Sort by estimated goals in descending order

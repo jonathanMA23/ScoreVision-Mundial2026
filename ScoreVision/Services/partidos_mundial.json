@@ -1,151 +1,1013 @@
 [
   {
-    "equipoLocal": { "id": 5, "nombre": "Argentina", "codigoFIFA": "ARG", "rankingIA": 2 },
-    "equipoVisitante": { "id": 6, "nombre": "Canadá", "codigoFIFA": "CAN", "rankingIA": 49 },
-    "marcadorLocal": 2,
-    "marcadorVisitante": 0,
-    "fecha": "14 Oct",
-    "estadio": "Mercedes-Benz",
+    "equipoLocal": { "id": 1, "nombre": "Estados Unidos", "codigoFIFA": "USA", "rankingIA": 11 },
+    "equipoVisitante": { "id": 2, "nombre": "México", "codigoFIFA": "MEX", "rankingIA": 10 },
+    "marcadorLocal": 1,
+    "marcadorVisitante": 2,
+    "fecha": "10 Jun",
+    "estadio": "MetLife Stadium",
     "estado": "Finalizado",
     "prediccionIA": {
-      "posibleResultado": "2-0", "probabilidadLocal": 0.80, "probabilidadEmpate": 0.15, "probabilidadVisitante": 0.05,
+      "posibleResultado": "1-2",
+      "probabilidadLocal": 0.34,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.36,
       "topGoleadoresEstimados": [
-        { "nombre": "Lautaro Martínez", "golesEstimados": 0.8, "probabilidadGol": 0.65 }
+        { "nombre": "Raúl Jiménez", "golesEstimados": 0.9, "probabilidadGol": 0.62 }
       ],
-      "factoresClave": ["Strong offense"]
+      "factoresClave": ["Balón parado", "Contraataque"]
     }
   },
   {
-    "equipoLocal": { "id": 1, "nombre": "México", "codigoFIFA": "MEX", "rankingIA": 10 },
-    "equipoVisitante": { "id": 3, "nombre": "Alemania", "codigoFIFA": "GER", "rankingIA": 7 },
-    "marcadorLocal": 2,
-    "marcadorVisitante": 1,
-    "fecha": "15 Oct",
-    "estadio": "Estadio Azteca",
-    "estado": "LIVE",
+    "equipoLocal": { "id": 3, "nombre": "Canadá", "codigoFIFA": "CAN", "rankingIA": 49 },
+    "equipoVisitante": { "id": 4, "nombre": "Argentina", "codigoFIFA": "ARG", "rankingIA": 2 },
+    "marcadorLocal": 0,
+    "marcadorVisitante": 3,
+    "fecha": "10 Jun",
+    "estadio": "NRG Stadium",
+    "estado": "Finalizado",
     "prediccionIA": {
-      "posibleResultado": "2-1", "probabilidadLocal": 0.46, "probabilidadEmpate": 0.25, "probabilidadVisitante": 0.29,
+      "posibleResultado": "0-3",
+      "probabilidadLocal": 0.12,
+      "probabilidadEmpate": 0.18,
+      "probabilidadVisitante": 0.70,
       "topGoleadoresEstimados": [
-        { "nombre": "Santi Giménez", "golesEstimados": 0.7, "probabilidadGol": 0.60 },
-        { "nombre": "Musiala", "golesEstimados": 1.1, "probabilidadGol": 0.75 }
+        { "nombre": "Messi", "golesEstimados": 1.4, "probabilidadGol": 0.84 }
       ],
-      "factoresClave": ["Home advantage", "Solid defense"]
+      "factoresClave": ["Juego asociativo", "Remates desde fuera"]
     }
   },
   {
-    "equipoLocal": { "id": 11, "nombre": "Francia", "codigoFIFA": "FRA", "rankingIA": 1 },
-    "equipoVisitante": { "id": 12, "nombre": "Croacia", "codigoFIFA": "CRO", "rankingIA": 9 },
+    "equipoLocal": { "id": 5, "nombre": "Brasil", "codigoFIFA": "BRA", "rankingIA": 3 },
+    "equipoVisitante": { "id": 6, "nombre": "Inglaterra", "codigoFIFA": "ENG", "rankingIA": 4 },
     "marcadorLocal": null,
     "marcadorVisitante": null,
-    "fecha": "15 Oct",
-    "estadio": "BC Place",
-    "estado": "Próximo",
-    "prediccionIA": {
-      "posibleResultado": "2-0", "probabilidadLocal": 0.70, "probabilidadEmpate": 0.20, "probabilidadVisitante": 0.10,
-      "topGoleadoresEstimados": [
-        { "nombre": "Mbappé", "golesEstimados": 1.7, "probabilidadGol": 0.90 },
-        { "nombre": "Griezmann", "golesEstimados": 0.9, "probabilidadGol": 0.70 }
-      ],
-      "factoresClave": ["Pace and Power"]
-    }
-  },
-  {
-    "equipoLocal": { "id": 2, "nombre": "Brasil", "codigoFIFA": "BRA", "rankingIA": 3 },
-    "equipoVisitante": { "id": 4, "nombre": "Japón", "codigoFIFA": "JAP", "rankingIA": 15 },
-    "marcadorLocal": null,
-    "marcadorVisitante": null,
-    "fecha": "16 Oct",
-    "estadio": "MetLife Stadium",
-    "estado": "Próximo",
-    "prediccionIA": {
-      "posibleResultado": "3-0", "probabilidadLocal": 0.75, "probabilidadEmpate": 0.15, "probabilidadVisitante": 0.10,
-      "topGoleadoresEstimados": [
-        { "nombre": "Vini Jr.", "golesEstimados": 1.4, "probabilidadGol": 0.85 },
-        { "nombre": "Rodrygo", "golesEstimados": 1.2, "probabilidadGol": 0.80 }
-      ],
-      "factoresClave": ["High possession", "Tiros a Puerta"]
-    }
-  },
-  {
-    "equipoLocal": { "id": 9, "nombre": "USA", "codigoFIFA": "USA", "rankingIA": 11 },
-    "equipoVisitante": { "id": 10, "nombre": "Inglaterra", "codigoFIFA": "ENG", "rankingIA": 4 },
-    "marcadorLocal": null,
-    "marcadorVisitante": null,
-    "fecha": "17 Oct",
+    "fecha": "11 Jun",
     "estadio": "AT&T Stadium",
     "estado": "Próximo",
     "prediccionIA": {
-      "posibleResultado": "1-2", "probabilidadLocal": 0.25, "probabilidadEmpate": 0.30, "probabilidadVisitante": 0.45,
+      "posibleResultado": "2-2",
+      "probabilidadLocal": 0.30,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.40,
       "topGoleadoresEstimados": [
-        { "nombre": "Harry Kane", "golesEstimados": 1.3, "probabilidadGol": 0.82 },
-        { "nombre": "Pulisic", "golesEstimados": 0.6, "probabilidadGol": 0.55 }
+        { "nombre": "Harry Kane", "golesEstimados": 1.2, "probabilidadGol": 0.80 },
+        { "nombre": "Vini Jr.", "golesEstimados": 1.1, "probabilidadGol": 0.78 }
       ],
-      "factoresClave": ["Midfield control"]
+      "factoresClave": ["Presión alta", "Físico"]
     }
   },
   {
-    "equipoLocal": { "id": 13, "nombre": "España", "codigoFIFA": "ESP", "rankingIA": 6 },
-    "equipoVisitante": { "id": 14, "nombre": "Italia", "codigoFIFA": "ITA", "rankingIA": 8 },
+    "equipoLocal": { "id": 7, "nombre": "Francia", "codigoFIFA": "FRA", "rankingIA": 1 },
+    "equipoVisitante": { "id": 8, "nombre": "Portugal", "codigoFIFA": "POR", "rankingIA": 5 },
     "marcadorLocal": null,
     "marcadorVisitante": null,
-    "fecha": "18 Oct",
+    "fecha": "11 Jun",
     "estadio": "SoFi Stadium",
     "estado": "Próximo",
     "prediccionIA": {
-      "posibleResultado": "1-1", "probabilidadLocal": 0.40, "probabilidadEmpate": 0.35, "probabilidadVisitante": 0.25,
+      "posibleResultado": "1-1",
+      "probabilidadLocal": 0.38,
+      "probabilidadEmpate": 0.32,
+      "probabilidadVisitante": 0.30,
       "topGoleadoresEstimados": [
-        { "nombre": "Morata", "golesEstimados": 0.7, "probabilidadGol": 0.60 }
+        { "nombre": "Mbappé", "golesEstimados": 1.2, "probabilidadGol": 0.85 },
+        { "nombre": "Cristiano Ronaldo", "golesEstimados": 1.0, "probabilidadGol": 0.82 }
       ],
-      "factoresClave": ["Tactical discipline"]
+      "factoresClave": ["Velocidad en bandas", "Tiros a puerta"]
     }
   },
   {
-    "equipoLocal": { "id": 15, "nombre": "Portugal", "codigoFIFA": "POR", "rankingIA": 5 },
-    "equipoVisitante": { "id": 16, "nombre": "Uruguay", "codigoFIFA": "URU", "rankingIA": 14 },
+    "equipoLocal": { "id": 9, "nombre": "Países Bajos", "codigoFIFA": "NED", "rankingIA": 13 },
+    "equipoVisitante": { "id": 10, "nombre": "Alemania", "codigoFIFA": "GER", "rankingIA": 7 },
     "marcadorLocal": 2,
-    "marcadorVisitante": 0,
-    "fecha": "13 Oct",
-    "estadio": "BMO Field",
-    "estado": "Finalizado",
+    "marcadorVisitante": 2,
+    "fecha": "12 Jun",
+    "estadio": "BC Place",
+    "estado": "LIVE",
     "prediccionIA": {
-      "posibleResultado": "2-1", "probabilidadLocal": 0.65, "probabilidadEmpate": 0.20, "probabilidadVisitante": 0.15,
+      "posibleResultado": "2-2",
+      "probabilidadLocal": 0.36,
+      "probabilidadEmpate": 0.28,
+      "probabilidadVisitante": 0.36,
       "topGoleadoresEstimados": [
-        { "nombre": "Cristiano Ronaldo", "golesEstimados": 1.5, "probabilidadGol": 0.88 }
+        { "nombre": "Kane", "golesEstimados": 1.1, "probabilidadGol": 0.79 }
       ],
-      "factoresClave": ["Counter-attack speed"]
+      "factoresClave": ["Control de mediocampo", "Centros"]
     }
   },
   {
-    "equipoLocal": { "id": 17, "nombre": "Bélgica", "codigoFIFA": "BEL", "rankingIA": 12 },
-    "equipoVisitante": { "id": 18, "nombre": "Países Bajos", "codigoFIFA": "NED", "rankingIA": 13 },
+    "equipoLocal": { "id": 11, "nombre": "Bélgica", "codigoFIFA": "BEL", "rankingIA": 12 },
+    "equipoVisitante": { "id": 12, "nombre": "España", "codigoFIFA": "ESP", "rankingIA": 6 },
     "marcadorLocal": null,
     "marcadorVisitante": null,
-    "fecha": "19 Oct",
+    "fecha": "12 Jun",
     "estadio": "Gillette Stadium",
     "estado": "Próximo",
     "prediccionIA": {
-      "posibleResultado": "2-2", "probabilidadLocal": 0.35, "probabilidadEmpate": 0.30, "probabilidadVisitante": 0.35,
+      "posibleResultado": "1-2",
+      "probabilidadLocal": 0.28,
+      "probabilidadEmpate": 0.34,
+      "probabilidadVisitante": 0.38,
       "topGoleadoresEstimados": [
-        { "nombre": "Lukaku", "golesEstimados": 1.0, "probabilidadGol": 0.70 },
-        { "nombre": "Depay", "golesEstimados": 0.9, "probabilidadGol": 0.68 }
+        { "nombre": "Morata", "golesEstimados": 0.9, "probabilidadGol": 0.66 },
+        { "nombre": "Lukaku", "golesEstimados": 1.0, "probabilidadGol": 0.72 }
       ],
-      "factoresClave": ["Attacking full-backs"]
+      "factoresClave": ["Posesión", "Creación de juego"]
     }
   },
   {
-    "equipoLocal": { "id": 19, "nombre": "Marruecos", "codigoFIFA": "MAR", "rankingIA": 22 },
-    "equipoVisitante": { "id": 20, "nombre": "Senegal", "codigoFIFA": "SEN", "rankingIA": 18 },
+    "equipoLocal": { "id": 13, "nombre": "Croacia", "codigoFIFA": "CRO", "rankingIA": 9 },
+    "equipoVisitante": { "id": 14, "nombre": "Marruecos", "codigoFIFA": "MAR", "rankingIA": 22 },
     "marcadorLocal": 1,
     "marcadorVisitante": 0,
-    "fecha": "12 Oct",
+    "fecha": "13 Jun",
     "estadio": "Levi's Stadium",
     "estado": "Finalizado",
     "prediccionIA": {
-      "posibleResultado": "1-0", "probabilidadLocal": 0.50, "probabilidadEmpate": 0.30, "probabilidadVisitante": 0.20,
+      "posibleResultado": "1-0",
+      "probabilidadLocal": 0.47,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.23,
       "topGoleadoresEstimados": [
-        { "nombre": "En-Nesyri", "golesEstimados": 0.6, "probabilidadGol": 0.55 }
+        { "nombre": "Modrić", "golesEstimados": 0.6, "probabilidadGol": 0.55 }
       ],
-      "factoresClave": ["Defensive organization"]
+      "factoresClave": ["Organización defensiva", "Control de balón"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 15, "nombre": "Colombia", "codigoFIFA": "COL", "rankingIA": 16 },
+    "equipoVisitante": { "id": 16, "nombre": "Uruguay", "codigoFIFA": "URU", "rankingIA": 14 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "13 Jun",
+    "estadio": "BMO Field",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-1",
+      "probabilidadLocal": 0.42,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.25,
+      "topGoleadoresEstimados": [
+        { "nombre": "Luis Díaz", "golesEstimados": 0.9, "probabilidadGol": 0.64 }
+      ],
+      "factoresClave": ["Transiciones rápidas", "Presión alta"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 17, "nombre": "Senegal", "codigoFIFA": "SEN", "rankingIA": 18 },
+    "equipoVisitante": { "id": 18, "nombre": "Suiza", "codigoFIFA": "SUI", "rankingIA": 17 },
+    "marcadorLocal": 0,
+    "marcadorVisitante": 1,
+    "fecha": "14 Jun",
+    "estadio": "Estadio Azteca",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "0-1",
+      "probabilidadLocal": 0.40,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.30,
+      "topGoleadoresEstimados": [
+        { "nombre": "Mendy", "golesEstimados": 0.7, "probabilidadGol": 0.59 }
+      ],
+      "factoresClave": ["Defensa compacta", "Contrataques"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 19, "nombre": "Japón", "codigoFIFA": "JAP", "rankingIA": 15 },
+    "equipoVisitante": { "id": 20, "nombre": "Irán", "codigoFIFA": "IRN", "rankingIA": 46 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "14 Jun",
+    "estadio": "Hard Rock Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "2-0",
+      "probabilidadLocal": 0.62,
+      "probabilidadEmpate": 0.24,
+      "probabilidadVisitante": 0.14,
+      "topGoleadoresEstimados": [
+        { "nombre": "Kubo", "golesEstimados": 1.1, "probabilidadGol": 0.76 }
+      ],
+      "factoresClave": ["Presión alta", "Velocidad"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 21, "nombre": "Corea del Sur", "codigoFIFA": "KOR", "rankingIA": 23 },
+    "equipoVisitante": { "id": 22, "nombre": "Ecuador", "codigoFIFA": "ECU", "rankingIA": 28 },
+    "marcadorLocal": 1,
+    "marcadorVisitante": 1,
+    "fecha": "15 Jun",
+    "estadio": "Mercedes-Benz",
+    "estado": "LIVE",
+    "prediccionIA": {
+      "posibleResultado": "1-1",
+      "probabilidadLocal": 0.41,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.26,
+      "topGoleadoresEstimados": [
+        { "nombre": "Enner Valencia", "golesEstimados": 0.9, "probabilidadGol": 0.65 }
+      ],
+      "factoresClave": ["Juego por bandas", "Segundas jugadas"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 23, "nombre": "Austria", "codigoFIFA": "AUT", "rankingIA": 24 },
+    "equipoVisitante": { "id": 24, "nombre": "Australia", "codigoFIFA": "AUS", "rankingIA": 25 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "15 Jun",
+    "estadio": "Levi's Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-2",
+      "probabilidadLocal": 0.30,
+      "probabilidadEmpate": 0.34,
+      "probabilidadVisitante": 0.36,
+      "topGoleadoresEstimados": [
+        { "nombre": "Awer Mabil", "golesEstimados": 0.8, "probabilidadGol": 0.60 }
+      ],
+      "factoresClave": ["Marcaje hombre a hombre", "Balón parado"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 25, "nombre": "Noruega", "codigoFIFA": "NOR", "rankingIA": 39 },
+    "equipoVisitante": { "id": 26, "nombre": "Panamá", "codigoFIFA": "PAN", "rankingIA": 42 },
+    "marcadorLocal": 4,
+    "marcadorVisitante": 1,
+    "fecha": "16 Jun",
+    "estadio": "NRG Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "3-1",
+      "probabilidadLocal": 0.60,
+      "probabilidadEmpate": 0.24,
+      "probabilidadVisitante": 0.16,
+      "topGoleadoresEstimados": [
+        { "nombre": "Haaland", "golesEstimados": 2.0, "probabilidadGol": 0.92 }
+      ],
+      "factoresClave": ["Remates dentro del área", "Aprovechamiento de ocasiones"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 27, "nombre": "Egipto", "codigoFIFA": "EGY", "rankingIA": 30 },
+    "equipoVisitante": { "id": 28, "nombre": "Argelia", "codigoFIFA": "ALG", "rankingIA": 31 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "16 Jun",
+    "estadio": "SoFi Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-2",
+      "probabilidadLocal": 0.29,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.38,
+      "topGoleadoresEstimados": [
+        { "nombre": "Mahrez", "golesEstimados": 1.1, "probabilidadGol": 0.77 }
+      ],
+      "factoresClave": ["Efectividad en área", "Tiros desde fuera"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 29, "nombre": "Escocia", "codigoFIFA": "SCO", "rankingIA": 32 },
+    "equipoVisitante": { "id": 30, "nombre": "Paraguay", "codigoFIFA": "PAR", "rankingIA": 35 },
+    "marcadorLocal": 0,
+    "marcadorVisitante": 0,
+    "fecha": "17 Jun",
+    "estadio": "Gillette Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "0-0",
+      "probabilidadLocal": 0.44,
+      "probabilidadEmpate": 0.36,
+      "probabilidadVisitante": 0.20,
+      "topGoleadoresEstimados": [
+        { "nombre": "Alcácer", "golesEstimados": 0.5, "probabilidadGol": 0.40 }
+      ],
+      "factoresClave": ["Bloque bajo", "Faltas laterales"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 31, "nombre": "Túnez", "codigoFIFA": "TUN", "rankingIA": 43 },
+    "equipoVisitante": { "id": 32, "nombre": "Costa de Marfil", "codigoFIFA": "CIV", "rankingIA": 38 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "17 Jun",
+    "estadio": "Hard Rock Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-1",
+      "probabilidadLocal": 0.39,
+      "probabilidadEmpate": 0.34,
+      "probabilidadVisitante": 0.27,
+      "topGoleadoresEstimados": [
+        { "nombre": "Zaha", "golesEstimados": 0.8, "probabilidadGol": 0.58 }
+      ],
+      "factoresClave": ["Velocidad por banda", "Segundas jugadas"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 33, "nombre": "Uzbekistán", "codigoFIFA": "UZB", "rankingIA": 41 },
+    "equipoVisitante": { "id": 34, "nombre": "Qatar", "codigoFIFA": "QAT", "rankingIA": 50 },
+    "marcadorLocal": 1,
+    "marcadorVisitante": 2,
+    "fecha": "18 Jun",
+    "estadio": "Levi's Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "1-2",
+      "probabilidadLocal": 0.30,
+      "probabilidadEmpate": 0.28,
+      "probabilidadVisitante": 0.42,
+      "topGoleadoresEstimados": [
+        { "nombre": "Almoez Ali", "golesEstimados": 1.1, "probabilidadGol": 0.71 }
+      ],
+      "factoresClave": ["Estrategia a balón parado", "Desmarques"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 35, "nombre": "Arabia Saudita", "codigoFIFA": "KSA", "rankingIA": 45 },
+    "equipoVisitante": { "id": 36, "nombre": "Sudáfrica", "codigoFIFA": "RSA", "rankingIA": 64 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "18 Jun",
+    "estadio": "NRG Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "2-0",
+      "probabilidadLocal": 0.55,
+      "probabilidadEmpate": 0.27,
+      "probabilidadVisitante": 0.18,
+      "topGoleadoresEstimados": [
+        { "nombre": "Al-Faraj", "golesEstimados": 0.9, "probabilidadGol": 0.63 }
+      ],
+      "factoresClave": ["Presión ofensiva", "Finalización"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 37, "nombre": "Jordania", "codigoFIFA": "JOR", "rankingIA": 70 },
+    "equipoVisitante": { "id": 38, "nombre": "Cabo Verde", "codigoFIFA": "CPV", "rankingIA": 60 },
+    "marcadorLocal": 0,
+    "marcadorVisitante": 1,
+    "fecha": "19 Jun",
+    "estadio": "SoFi Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "0-1",
+      "probabilidadLocal": 0.28,
+      "probabilidadEmpate": 0.34,
+      "probabilidadVisitante": 0.38,
+      "topGoleadoresEstimados": [
+        { "nombre": "Ryan Mendes", "golesEstimados": 0.7, "probabilidadGol": 0.56 }
+      ],
+      "factoresClave": ["Efectividad en área", "Presión tras pérdida"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 39, "nombre": "Ghana", "codigoFIFA": "GHA", "rankingIA": 37 },
+    "equipoVisitante": { "id": 40, "nombre": "Curazao", "codigoFIFA": "CUW", "rankingIA": 61 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "19 Jun",
+    "estadio": "AT&T Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "2-0",
+      "probabilidadLocal": 0.58,
+      "probabilidadEmpate": 0.26,
+      "probabilidadVisitante": 0.16,
+      "topGoleadoresEstimados": [
+        { "nombre": "Jordan Ayew", "golesEstimados": 0.9, "probabilidadGol": 0.61 }
+      ],
+      "factoresClave": ["Velocidad en transición", "Físico"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 41, "nombre": "Haití", "codigoFIFA": "HAI", "rankingIA": 65 },
+    "equipoVisitante": { "id": 42, "nombre": "Nueva Zelanda", "codigoFIFA": "NZL", "rankingIA": 80 },
+    "marcadorLocal": 1,
+    "marcadorVisitante": 0,
+    "fecha": "20 Jun",
+    "estadio": "Gillette Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "1-0",
+      "probabilidadLocal": 0.46,
+      "probabilidadEmpate": 0.31,
+      "probabilidadVisitante": 0.23,
+      "topGoleadoresEstimados": [
+        { "nombre": "Duckens Nazon", "golesEstimados": 0.8, "probabilidadGol": 0.58 }
+      ],
+      "factoresClave": ["Defensa organizada", "Estrategia sólida"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 43, "nombre": "Egipto", "codigoFIFA": "EGY", "rankingIA": 30 },
+    "equipoVisitante": { "id": 44, "nombre": "Ghana", "codigoFIFA": "GHA", "rankingIA": 37 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "20 Jun",
+    "estadio": "Levi's Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-1",
+      "probabilidadLocal": 0.40,
+      "probabilidadEmpate": 0.34,
+      "probabilidadVisitante": 0.26,
+      "topGoleadoresEstimados": [
+        { "nombre": "Salah", "golesEstimados": 1.0, "probabilidadGol": 0.74 }
+      ],
+      "factoresClave": ["Ataque por bandas", "Tiros de media distancia"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 45, "nombre": "Argelia", "codigoFIFA": "ALG", "rankingIA": 31 },
+    "equipoVisitante": { "id": 46, "nombre": "Cabo Verde", "codigoFIFA": "CPV", "rankingIA": 60 },
+    "marcadorLocal": 2,
+    "marcadorVisitante": 1,
+    "fecha": "21 Jun",
+    "estadio": "NRG Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "2-1",
+      "probabilidadLocal": 0.50,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.20,
+      "topGoleadoresEstimados": [
+        { "nombre": "Boulaya", "golesEstimados": 1.0, "probabilidadGol": 0.68 }
+      ],
+      "factoresClave": ["Transiciones ofensivas", "Presión alta"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 47, "nombre": "Escocia", "codigoFIFA": "SCO", "rankingIA": 32 },
+    "equipoVisitante": { "id": 48, "nombre": "Paraguay", "codigoFIFA": "PAR", "rankingIA": 35 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "21 Jun",
+    "estadio": "SoFi Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-0",
+      "probabilidadLocal": 0.44,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.23,
+      "topGoleadoresEstimados": [
+        { "nombre": "Che Adams", "golesEstimados": 0.7, "probabilidadGol": 0.57 }
+      ],
+      "factoresClave": ["Juego aéreo", "Balón parado"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 49, "nombre": "Túnez", "codigoFIFA": "TUN", "rankingIA": 43 },
+    "equipoVisitante": { "id": 50, "nombre": "Costa de Marfil", "codigoFIFA": "CIV", "rankingIA": 38 },
+    "marcadorLocal": 1,
+    "marcadorVisitante": 2,
+    "fecha": "22 Jun",
+    "estadio": "Hard Rock Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "1-2",
+      "probabilidadLocal": 0.30,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.40,
+      "topGoleadoresEstimados": [
+        { "nombre": "Pepe", "golesEstimados": 1.0, "probabilidadGol": 0.70 }
+      ],
+      "factoresClave": ["Velocidad en contraataque", "Remates dentro del área"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 51, "nombre": "Uzbekistán", "codigoFIFA": "UZB", "rankingIA": 41 },
+    "equipoVisitante": { "id": 52, "nombre": "Qatar", "codigoFIFA": "QAT", "rankingIA": 50 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "22 Jun",
+    "estadio": "Gillette Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "0-1",
+      "probabilidadLocal": 0.26,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.41,
+      "topGoleadoresEstimados": [
+        { "nombre": "Almoez Ali", "golesEstimados": 1.0, "probabilidadGol": 0.69 }
+      ],
+      "factoresClave": ["Estrategia combinada", "Finalización"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 53, "nombre": "Arabia Saudita", "codigoFIFA": "KSA", "rankingIA": 45 },
+    "equipoVisitante": { "id": 54, "nombre": "Sudáfrica", "codigoFIFA": "RSA", "rankingIA": 64 },
+    "marcadorLocal": 2,
+    "marcadorVisitante": 0,
+    "fecha": "23 Jun",
+    "estadio": "Levi's Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "2-0",
+      "probabilidadLocal": 0.60,
+      "probabilidadEmpate": 0.25,
+      "probabilidadVisitante": 0.15,
+      "topGoleadoresEstimados": [
+        { "nombre": "Al-Dawsari", "golesEstimados": 0.9, "probabilidadGol": 0.66 }
+      ],
+      "factoresClave": ["Remates desde fuera", "Presión ofensiva"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 55, "nombre": "Jordania", "codigoFIFA": "JOR", "rankingIA": 70 },
+    "equipoVisitante": { "id": 56, "nombre": "Cabo Verde", "codigoFIFA": "CPV", "rankingIA": 60 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "23 Jun",
+    "estadio": "AT&T Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "0-1",
+      "probabilidadLocal": 0.28,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.39,
+      "topGoleadoresEstimados": [
+        { "nombre": "Ryan Mendes", "golesEstimados": 0.8, "probabilidadGol": 0.59 }
+      ],
+      "factoresClave": ["Efectividad en el área", "Desmarques"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 57, "nombre": "Ghana", "codigoFIFA": "GHA", "rankingIA": 37 },
+    "equipoVisitante": { "id": 58, "nombre": "Curazao", "codigoFIFA": "CUW", "rankingIA": 61 },
+    "marcadorLocal": 3,
+    "marcadorVisitante": 1,
+    "fecha": "24 Jun",
+    "estadio": "SoFi Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "2-1",
+      "probabilidadLocal": 0.56,
+      "probabilidadEmpate": 0.27,
+      "probabilidadVisitante": 0.17,
+      "topGoleadoresEstimados": [
+        { "nombre": "Kudus", "golesEstimados": 1.2, "probabilidadGol": 0.75 }
+      ],
+      "factoresClave": ["Velocidad y contragolpes", "Finalización"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 59, "nombre": "Haití", "codigoFIFA": "HAI", "rankingIA": 65 },
+    "equipoVisitante": { "id": 60, "nombre": "Nueva Zelanda", "codigoFIFA": "NZL", "rankingIA": 80 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "24 Jun",
+    "estadio": "Hard Rock Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-0",
+      "probabilidadLocal": 0.44,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.23,
+      "topGoleadoresEstimados": [
+        { "nombre": "Duckens Nazon", "golesEstimados": 0.9, "probabilidadGol": 0.61 }
+      ],
+      "factoresClave": ["Presión alta", "Balón parado"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 61, "nombre": "Estados Unidos", "codigoFIFA": "USA", "rankingIA": 11 },
+    "equipoVisitante": { "id": 62, "nombre": "Inglaterra", "codigoFIFA": "ENG", "rankingIA": 4 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "25 Jun",
+    "estadio": "Gillette Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-2",
+      "probabilidadLocal": 0.33,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.37,
+      "topGoleadoresEstimados": [
+        { "nombre": "Pulisic", "golesEstimados": 0.9, "probabilidadGol": 0.63 },
+        { "nombre": "Harry Kane", "golesEstimados": 1.3, "probabilidadGol": 0.82 }
+      ],
+      "factoresClave": ["Velocidad por bandas", "Finalización"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 63, "nombre": "México", "codigoFIFA": "MEX", "rankingIA": 10 },
+    "equipoVisitante": { "id": 64, "nombre": "Brasil", "codigoFIFA": "BRA", "rankingIA": 3 },
+    "marcadorLocal": 0,
+    "marcadorVisitante": 3,
+    "fecha": "25 Jun",
+    "estadio": "Estadio Azteca",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "0-3",
+      "probabilidadLocal": 0.20,
+      "probabilidadEmpate": 0.25,
+      "probabilidadVisitante": 0.55,
+      "topGoleadoresEstimados": [
+        { "nombre": "Neymar", "golesEstimados": 1.2, "probabilidadGol": 0.78 }
+      ],
+      "factoresClave": ["Toque, creación", "Remate dentro del área"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 65, "nombre": "Francia", "codigoFIFA": "FRA", "rankingIA": 1 },
+    "equipoVisitante": { "id": 66, "nombre": "España", "codigoFIFA": "ESP", "rankingIA": 6 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "26 Jun",
+    "estadio": "NRG Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "2-1",
+      "probabilidadLocal": 0.44,
+      "probabilidadEmpate": 0.29,
+      "probabilidadVisitante": 0.27,
+      "topGoleadoresEstimados": [
+        { "nombre": "Mbappé", "golesEstimados": 1.4, "probabilidadGol": 0.86 }
+      ],
+      "factoresClave": ["Velocidad ofensiva", "Tiro desde fuera"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 67, "nombre": "Portugal", "codigoFIFA": "POR", "rankingIA": 5 },
+    "equipoVisitante": { "id": 68, "nombre": "Países Bajos", "codigoFIFA": "NED", "rankingIA": 13 },
+    "marcadorLocal": 2,
+    "marcadorVisitante": 2,
+    "fecha": "26 Jun",
+    "estadio": "SoFi Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "2-2",
+      "probabilidadLocal": 0.37,
+      "probabilidadEmpate": 0.31,
+      "probabilidadVisitante": 0.32,
+      "topGoleadoresEstimados": [
+        { "nombre": "Cristiano Ronaldo", "golesEstimados": 1.3, "probabilidadGol": 0.85 }
+      ],
+      "factoresClave": ["Estrategia de ataque", "Balón parado"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 69, "nombre": "Alemania", "codigoFIFA": "GER", "rankingIA": 7 },
+    "equipoVisitante": { "id": 70, "nombre": "Bélgica", "codigoFIFA": "BEL", "rankingIA": 12 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "27 Jun",
+    "estadio": "Levi's Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-1",
+      "probabilidadLocal": 0.40,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.27,
+      "topGoleadoresEstimados": [
+        { "nombre": "Gnabry", "golesEstimados": 0.9, "probabilidadGol": 0.62 }
+      ],
+      "factoresClave": ["Circulación de balón", "Remates desde fuera"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 71, "nombre": "Croacia", "codigoFIFA": "CRO", "rankingIA": 9 },
+    "equipoVisitante": { "id": 72, "nombre": "Marruecos", "codigoFIFA": "MAR", "rankingIA": 22 },
+    "marcadorLocal": 1,
+    "marcadorVisitante": 1,
+    "fecha": "27 Jun",
+    "estadio": "AT&T Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "1-1",
+      "probabilidadLocal": 0.43,
+      "probabilidadEmpate": 0.34,
+      "probabilidadVisitante": 0.23,
+      "topGoleadoresEstimados": [
+        { "nombre": "Perišić", "golesEstimados": 0.8, "probabilidadGol": 0.60 }
+      ],
+      "factoresClave": ["Transiciones", "Presión en mediocampo"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 73, "nombre": "Colombia", "codigoFIFA": "COL", "rankingIA": 16 },
+    "equipoVisitante": { "id": 74, "nombre": "Uruguay", "codigoFIFA": "URU", "rankingIA": 14 },
+    "marcadorLocal": 2,
+    "marcadorVisitante": 0,
+    "fecha": "28 Jun",
+    "estadio": "Gillette Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "2-0",
+      "probabilidadLocal": 0.55,
+      "probabilidadEmpate": 0.28,
+      "probabilidadVisitante": 0.17,
+      "topGoleadoresEstimados": [
+        { "nombre": "Luis Díaz", "golesEstimados": 1.1, "probabilidadGol": 0.75 }
+      ],
+      "factoresClave": ["Juego por banda", "Remates dentro del área"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 75, "nombre": "Senegal", "codigoFIFA": "SEN", "rankingIA": 18 },
+    "equipoVisitante": { "id": 76, "nombre": "Suiza", "codigoFIFA": "SUI", "rankingIA": 17 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "28 Jun",
+    "estadio": "SoFi Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-2",
+      "probabilidadLocal": 0.34,
+      "probabilidadEmpate": 0.31,
+      "probabilidadVisitante": 0.35,
+      "topGoleadoresEstimados": [
+        { "nombre": "Mané", "golesEstimados": 1.0, "probabilidadGol": 0.78 }
+      ],
+      "factoresClave": ["Velocidad y toques", "Estrategia en área"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 77, "nombre": "Japón", "codigoFIFA": "JAP", "rankingIA": 15 },
+    "equipoVisitante": { "id": 78, "nombre": "Corea del Sur", "codigoFIFA": "KOR", "rankingIA": 23 },
+    "marcadorLocal": 0,
+    "marcadorVisitante": 1,
+    "fecha": "29 Jun",
+    "estadio": "NRG Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "0-1",
+      "probabilidadLocal": 0.36,
+      "probabilidadEmpate": 0.34,
+      "probabilidadVisitante": 0.30,
+      "topGoleadoresEstimados": [
+        { "nombre": "Son Heung-min", "golesEstimados": 1.0, "probabilidadGol": 0.74 }
+      ],
+      "factoresClave": ["Contraataques", "Velocidad"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 79, "nombre": "Ecuador", "codigoFIFA": "ECU", "rankingIA": 28 },
+    "equipoVisitante": { "id": 80, "nombre": "Austria", "codigoFIFA": "AUT", "rankingIA": 24 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "29 Jun",
+    "estadio": "Hard Rock Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "2-1",
+      "probabilidadLocal": 0.46,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.24,
+      "topGoleadoresEstimados": [
+        { "nombre": "Caicedo", "golesEstimados": 1.0, "probabilidadGol": 0.70 }
+      ],
+      "factoresClave": ["Juego directo", "Finalización"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 81, "nombre": "Australia", "codigoFIFA": "AUS", "rankingIA": 25 },
+    "equipoVisitante": { "id": 82, "nombre": "Noruega", "codigoFIFA": "NOR", "rankingIA": 39 },
+    "marcadorLocal": 1,
+    "marcadorVisitante": 3,
+    "fecha": "30 Jun",
+    "estadio": "MetLife Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "1-2",
+      "probabilidadLocal": 0.30,
+      "probabilidadEmpate": 0.28,
+      "probabilidadVisitante": 0.42,
+      "topGoleadoresEstimados": [
+        { "nombre": "Haaland", "golesEstimados": 1.6, "probabilidadGol": 0.90 }
+      ],
+      "factoresClave": ["Remates dentro del área", "Efectividad"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 83, "nombre": "Panamá", "codigoFIFA": "PAN", "rankingIA": 42 },
+    "equipoVisitante": { "id": 84, "nombre": "Egipto", "codigoFIFA": "EGY", "rankingIA": 30 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "30 Jun",
+    "estadio": "AT&T Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "0-1",
+      "probabilidadLocal": 0.29,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.38,
+      "topGoleadoresEstimados": [
+        { "nombre": "Mohamed Salah", "golesEstimados": 1.2, "probabilidadGol": 0.80 }
+      ],
+      "factoresClave": ["Velocidad por banda", "Finalización"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 85, "nombre": "Argelia", "codigoFIFA": "ALG", "rankingIA": 31 },
+    "equipoVisitante": { "id": 86, "nombre": "Escocia", "codigoFIFA": "SCO", "rankingIA": 32 },
+    "marcadorLocal": 2,
+    "marcadorVisitante": 0,
+    "fecha": "01 Jul",
+    "estadio": "Gillette Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "2-0",
+      "probabilidadLocal": 0.52,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.18,
+      "topGoleadoresEstimados": [
+        { "nombre": "Brahimi", "golesEstimados": 0.9, "probabilidadGol": 0.64 }
+      ],
+      "factoresClave": ["Control de balón", "Remates desde media distancia"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 87, "nombre": "Paraguay", "codigoFIFA": "PAR", "rankingIA": 35 },
+    "equipoVisitante": { "id": 88, "nombre": "Túnez", "codigoFIFA": "TUN", "rankingIA": 43 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "01 Jul",
+    "estadio": "SoFi Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-1",
+      "probabilidadLocal": 0.39,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.28,
+      "topGoleadoresEstimados": [
+        { "nombre": "Cecilio Domínguez", "golesEstimados": 0.7, "probabilidadGol": 0.54 }
+      ],
+      "factoresClave": ["Faltas y centros", "Juego aéreo"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 89, "nombre": "Costa de Marfil", "codigoFIFA": "CIV", "rankingIA": 38 },
+    "equipoVisitante": { "id": 90, "nombre": "Uzbekistán", "codigoFIFA": "UZB", "rankingIA": 41 },
+    "marcadorLocal": 2,
+    "marcadorVisitante": 1,
+    "fecha": "02 Jul",
+    "estadio": "Hard Rock Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "2-1",
+      "probabilidadLocal": 0.54,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.16,
+      "topGoleadoresEstimados": [
+        { "nombre": "Wilfried Zaha", "golesEstimados": 1.0, "probabilidadGol": 0.70 }
+      ],
+      "factoresClave": ["Velocidad", "Remates en área chica"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 91, "nombre": "Qatar", "codigoFIFA": "QAT", "rankingIA": 50 },
+    "equipoVisitante": { "id": 92, "nombre": "Arabia Saudita", "codigoFIFA": "KSA", "rankingIA": 45 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "02 Jul",
+    "estadio": "NRG Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "0-1",
+      "probabilidadLocal": 0.27,
+      "probabilidadEmpate": 0.34,
+      "probabilidadVisitante": 0.39,
+      "topGoleadoresEstimados": [
+        { "nombre": "Sami Al-Najei", "golesEstimados": 0.8, "probabilidadGol": 0.60 }
+      ],
+      "factoresClave": ["Táctica defensiva", "Contragolpe"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 93, "nombre": "Sudáfrica", "codigoFIFA": "RSA", "rankingIA": 64 },
+    "equipoVisitante": { "id": 94, "nombre": "Jordania", "codigoFIFA": "JOR", "rankingIA": 70 },
+    "marcadorLocal": 1,
+    "marcadorVisitante": 0,
+    "fecha": "03 Jul",
+    "estadio": "Levi's Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "1-0",
+      "probabilidadLocal": 0.45,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.22,
+      "topGoleadoresEstimados": [
+        { "nombre": "Themba Zwane", "golesEstimados": 0.7, "probabilidadGol": 0.56 }
+      ],
+      "factoresClave": ["Bloque bajo", "Estrategia defensiva"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 95, "nombre": "Cabo Verde", "codigoFIFA": "CPV", "rankingIA": 60 },
+    "equipoVisitante": { "id": 96, "nombre": "Ghana", "codigoFIFA": "GHA", "rankingIA": 37 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "03 Jul",
+    "estadio": "Gillette Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "0-2",
+      "probabilidadLocal": 0.22,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.48,
+      "topGoleadoresEstimados": [
+        { "nombre": "Kudus", "golesEstimados": 1.0, "probabilidadGol": 0.72 }
+      ],
+      "factoresClave": ["Presión alta", "Finalización"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 97, "nombre": "Curazao", "codigoFIFA": "CUW", "rankingIA": 61 },
+    "equipoVisitante": { "id": 98, "nombre": "Haití", "codigoFIFA": "HAI", "rankingIA": 65 },
+    "marcadorLocal": 2,
+    "marcadorVisitante": 1,
+    "fecha": "04 Jul",
+    "estadio": "SoFi Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "2-1",
+      "probabilidadLocal": 0.49,
+      "probabilidadEmpate": 0.29,
+      "probabilidadVisitante": 0.22,
+      "topGoleadoresEstimados": [
+        { "nombre": "Leandro Bacuna", "golesEstimados": 0.9, "probabilidadGol": 0.63 }
+      ],
+      "factoresClave": ["Velocidad en ataque", "Efectividad"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 99, "nombre": "Nueva Zelanda", "codigoFIFA": "NZL", "rankingIA": 80 },
+    "equipoVisitante": { "id": 100, "nombre": "Panamá", "codigoFIFA": "PAN", "rankingIA": 42 },
+    "marcadorLocal": 0,
+    "marcadorVisitante": 1,
+    "fecha": "04 Jul",
+    "estadio": "Hard Rock Stadium",
+    "estado": "Finalizado",
+    "prediccionIA": {
+      "posibleResultado": "0-1",
+      "probabilidadLocal": 0.28,
+      "probabilidadEmpate": 0.32,
+      "probabilidadVisitante": 0.40,
+      "topGoleadoresEstimados": [
+        { "nombre": "Rolando Blackburn", "golesEstimados": 0.8, "probabilidadGol": 0.59 }
+      ],
+      "factoresClave": ["Finalización", "Remates dentro del área"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 101, "nombre": "Repechaje Europa 1", "codigoFIFA": "REP-EU1", "rankingIA": 99 },
+    "equipoVisitante": { "id": 102, "nombre": "Repechaje Europa 2", "codigoFIFA": "REP-EU2", "rankingIA": 99 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "05 Jul",
+    "estadio": "MetLife Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-1",
+      "probabilidadLocal": 0.33,
+      "probabilidadEmpate": 0.34,
+      "probabilidadVisitante": 0.33,
+      "topGoleadoresEstimados": [
+        { "nombre": "Jugador A", "golesEstimados": 0.6, "probabilidadGol": 0.50 }
+      ],
+      "factoresClave": ["Incógnita de equipos", "Estrategias variables"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 103, "nombre": "Repechaje Europa 3", "codigoFIFA": "REP-EU3", "rankingIA": 99 },
+    "equipoVisitante": { "id": 104, "nombre": "Repechaje Europa 4", "codigoFIFA": "REP-EU4", "rankingIA": 99 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "05 Jul",
+    "estadio": "AT&T Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "0-2",
+      "probabilidadLocal": 0.28,
+      "probabilidadEmpate": 0.30,
+      "probabilidadVisitante": 0.42,
+      "topGoleadoresEstimados": [
+        { "nombre": "Jugador B", "golesEstimados": 0.9, "probabilidadGol": 0.63 }
+      ],
+      "factoresClave": ["Preparación física", "Táctica"]
+    }
+  },
+  {
+    "equipoLocal": { "id": 105, "nombre": "Repechaje Intercontiental 1", "codigoFIFA": "REP-IC1", "rankingIA": 99 },
+    "equipoVisitante": { "id": 106, "nombre": "Repechaje Intercontiental 2", "codigoFIFA": "REP-IC2", "rankingIA": 99 },
+    "marcadorLocal": null,
+    "marcadorVisitante": null,
+    "fecha": "06 Jul",
+    "estadio": "Gillette Stadium",
+    "estado": "Próximo",
+    "prediccionIA": {
+      "posibleResultado": "1-0",
+      "probabilidadLocal": 0.36,
+      "probabilidadEmpate": 0.33,
+      "probabilidadVisitante": 0.31,
+      "topGoleadoresEstimados": [
+        { "nombre": "Jugador C", "golesEstimados": 0.7, "probabilidadGol": 0.55 }
+      ],
+      "factoresClave": ["Preparación mental", "Estrategia defensiva"]
     }
   }
 ]
