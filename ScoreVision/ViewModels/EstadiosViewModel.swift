@@ -1,20 +1,17 @@
-
 import SwiftUI
 import MapKit
 import Combine
 
 // --- 1. Modelo de Datos Detallado ---
-// Create a more robust data structure for each stadium.
 struct Estadio: Identifiable {
     let id = UUID()
     let nombre: String
     let ciudad: String
-    let pais: String
+    let pais: String // "Canadá", "México", "Estados Unidos"
     let capacidad: Int
-    let imageName: String
     let coordinate: CLLocationCoordinate2D
     
-    // Formats the capacity number with commas.
+    // Propiedad computada para formatear la capacidad (ej: 87,523)
     var capacidadFormatted: String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -22,16 +19,42 @@ struct Estadio: Identifiable {
     }
 }
 
-// --- 2. ViewModel (or Data Source) ---
-// This class will manage the data, making your view cleaner.
+// --- 2. ViewModel ---
 class EstadiosViewModel: ObservableObject {
-    @Published var estadios: [Estadio] = [
-        Estadio(nombre: "Estadio Azteca", ciudad: "Mexico City", pais: "MEX", capacidad: 87523, imageName: "azteca", coordinate: .init(latitude: 19.3029, longitude: -99.1504)),
-        Estadio(nombre: "MetLife Stadium", ciudad: "New Jersey", pais: "USA", capacidad: 82500, imageName: "metlife", coordinate: .init(latitude: 40.8135, longitude: -74.0745)),
-        Estadio(nombre: "SoFi Stadium", ciudad: "Los Angeles", pais: "USA", capacidad: 70240, imageName: "sofi", coordinate: .init(latitude: 33.9535, longitude: -118.3392)),
-        Estadio(nombre: "AT&T Stadium", ciudad: "Dallas", pais: "USA", capacidad: 80000, imageName: "att", coordinate: .init(latitude: 32.7478, longitude: -97.0929)),
-        Estadio(nombre: "Mercedes-Benz Stadium", ciudad: "Atlanta", pais: "USA", capacidad: 71000, imageName: "mercedes", coordinate: .init(latitude: 33.7554, longitude: -84.4005)),
-        Estadio(nombre: "BC Place", ciudad: "Vancouver", pais: "CAN", capacidad: 54500, imageName: "bcplace", coordinate: .init(latitude: 49.2767, longitude: -123.1119)),
-        Estadio(nombre: "BMO Field", ciudad: "Toronto", pais: "CAN", capacidad: 45000, imageName: "bmo", coordinate: .init(latitude: 43.6328, longitude: -79.4185))
-    ]
+    @Published var estadios: [Estadio] = []
+    
+    init() {
+        cargarEstadios()
+    }
+    
+    func cargarEstadios() {
+        self.estadios = [
+            // --- CANADÁ ---
+            Estadio(nombre: "Toronto Stadium", ciudad: "Toronto, Ontario", pais: "Canadá", capacidad: 30000, coordinate: CLLocationCoordinate2D(latitude: 43.6332, longitude: -79.4186)),
+            Estadio(nombre: "BC Place Vancouver", ciudad: "Vancouver, British Columbia", pais: "Canadá", capacidad: 54500, coordinate: CLLocationCoordinate2D(latitude: 49.2768, longitude: -123.1120)),
+            
+            // --- MÉXICO ---
+            Estadio(nombre: "Estadio Azteca", ciudad: "Tlalpan, CDMX", pais: "México", capacidad: 87523, coordinate: CLLocationCoordinate2D(latitude: 19.3029, longitude: -99.1505)),
+            Estadio(nombre: "Estadio Guadalajara", ciudad: "Zapopan, Jalisco", pais: "México", capacidad: 48071, coordinate: CLLocationCoordinate2D(latitude: 20.6818, longitude: -103.4626)),
+            Estadio(nombre: "Estadio Monterrey", ciudad: "Guadalupe, Nuevo León", pais: "México", capacidad: 53500, coordinate: CLLocationCoordinate2D(latitude: 25.6180, longitude: -100.2493)),
+            
+            // --- ESTADOS UNIDOS ---
+            Estadio(nombre: "Atlanta Stadium", ciudad: "Atlanta, Georgia", pais: "Estados Unidos", capacidad: 71000, coordinate: CLLocationCoordinate2D(latitude: 33.7554, longitude: -84.4010)),
+            Estadio(nombre: "Boston Stadium", ciudad: "Foxborough, Massachusetts", pais: "Estados Unidos", capacidad: 65878, coordinate: CLLocationCoordinate2D(latitude: 42.0909, longitude: -71.2643)),
+            Estadio(nombre: "Dallas Stadium", ciudad: "Arlington, Texas", pais: "Estados Unidos", capacidad: 80000, coordinate: CLLocationCoordinate2D(latitude: 32.7473, longitude: -97.0945)),
+            Estadio(nombre: "Houston Stadium", ciudad: "Houston, Texas", pais: "Estados Unidos", capacidad: 72220, coordinate: CLLocationCoordinate2D(latitude: 29.6847, longitude: -95.4107)),
+            Estadio(nombre: "Kansas City Stadium", ciudad: "Kansas City, Missouri", pais: "Estados Unidos", capacidad: 76416, coordinate: CLLocationCoordinate2D(latitude: 39.0489, longitude: -94.4839)),
+            Estadio(nombre: "Los Angeles Stadium", ciudad: "Inglewood, California", pais: "Estados Unidos", capacidad: 70240, coordinate: CLLocationCoordinate2D(latitude: 33.9535, longitude: -118.3390)),
+            Estadio(nombre: "San Francisco Bay Area Stadium", ciudad: "Santa Clara, California", pais: "Estados Unidos", capacidad: 68500, coordinate: CLLocationCoordinate2D(latitude: 37.4030, longitude: -121.9700)),
+            Estadio(nombre: "Seattle Stadium", ciudad: "Seattle, Washington", pais: "Estados Unidos", capacidad: 69000, coordinate: CLLocationCoordinate2D(latitude: 47.5952, longitude: -122.3316)),
+            Estadio(nombre: "Miami Stadium", ciudad: "Miami Gardens, Florida", pais: "Estados Unidos", capacidad: 64767, coordinate: CLLocationCoordinate2D(latitude: 25.9580, longitude: -80.2389)),
+            Estadio(nombre: "New York/New Jersey Stadium", ciudad: "East Rutherford, NJ", pais: "Estados Unidos", capacidad: 82500, coordinate: CLLocationCoordinate2D(latitude: 40.8135, longitude: -74.0745)),
+            Estadio(nombre: "Philadelphia Stadium", ciudad: "Philadelphia, Pennsylvania", pais: "Estados Unidos", capacidad: 67594, coordinate: CLLocationCoordinate2D(latitude: 39.9008, longitude: -75.1675))
+        ]
+    }
+    
+    // Helpers para filtrar en la vista
+    func estadiosPorPais(_ pais: String) -> [Estadio] {
+        return estadios.filter { $0.pais == pais }
+    }
 }
