@@ -10,7 +10,7 @@ struct ContentView: View {
 
             EquipoView()
                 .tabItem {
-                    Label("Equipo", systemImage: "tshirt.fill")
+                    Label("Equipos", systemImage: "tshirt.fill")
                 }
             
             AnalisisView()

@@ -1,127 +1,162 @@
 import SwiftUI
+import Charts
 
-
-
-
-// --- Vista Principal Mejorada ---
 struct AnalisisView: View {
-    @StateObject var viewModel = AnalisisViewModel()
-
+    // Datos simulados de "Eficiencia Goleadora" (Goles vs xG)
+    struct TeamEfficiency: Identifiable {
+        let id = UUID()
+        let name: String
+        let xG: Double
+        let goals: Double
+        let color: Color
+    }
+    
+    let efficiencyData: [TeamEfficiency] = [
+        TeamEfficiency(name: "Brasil", xG: 12.5, goals: 15, color: .yellow),
+        TeamEfficiency(name: "Francia", xG: 10.2, goals: 11, color: .blue),
+        TeamEfficiency(name: "México", xG: 4.5, goals: 6, color: .green), // Sobre-desempeño positivo
+        TeamEfficiency(name: "Alemania", xG: 8.0, goals: 5, color: .white), // Bajo desempeño
+        TeamEfficiency(name: "Inglaterra", xG: 9.1, goals: 9, color: .red)
+    ]
+    
     var body: some View {
         NavigationView {
-            List {
-                // --- Sección 1: Visión General ---
-                Section {
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack {
-                            Image(systemName: "chart.pie.fill")
-                                .font(.title)
-                                .foregroundColor(.accentColor)
-                            Text("Visión Centralizada del Mundial 2026")
-                                .font(.headline)
-                        }
-                        Text("ScoreVision AI: Análisis en tiempo real de 120+ métricas por partido.")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 25) {
+                    
+                    // Header
+                    VStack(alignment: .leading) {
+                        Text("BIG DATA MUNDIAL")
+                            .font(.caption).fontWeight(.black).tracking(2).foregroundColor(.purple)
+                        Text("Torneo en Cifras")
+                            .font(.largeTitle).bold().foregroundColor(.primary)
                     }
-                    .padding(.vertical, 8)
-                }
-
-                // --- Sección 2: Métrica de Posesión Efectiva ---
-                Section(header: Text("Métrica Clave").font(.headline).padding(.leading, -1)) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Image(systemName: "figure.soccer")
-                            Text("Posesión Efectiva Promedio")
-                        }
-                        .font(.headline)
-
-                        HStack {
-                            Text("\(viewModel.posesionEfectiva)%")
-                                .font(.system(size: 40, weight: .bold, design: .rounded))
-                                .foregroundColor(.orange)
-
-                            Spacer()
-
-                            VStack(alignment: .trailing, spacing: 4) {
-                                Text("Factor Clave")
-                                    .font(.caption.bold())
-                                    .foregroundColor(.orange)
-                                Text("Pases progresivos y tiros a puerta.")
-                                    .font(.caption)
-                                    .multilineTextAlignment(.trailing)
-                            }
-                        }
-
-                        // Barra de progreso para comparación visual
-                        VStack(alignment: .leading) {
-                            ProgressView(value: Double(viewModel.posesionEfectiva), total: 100)
-                                .progressViewStyle(LinearProgressViewStyle(tint: .orange))
-                            Text("Promedio del torneo: \(viewModel.promedioTorneo)%")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    .padding(.vertical)
-                }
-
-                // --- Sección 3: Goles Esperados (xG) ---
-                Section(header: Text("Goles Esperados (xG)").font(.headline).padding(.leading, -1)) {
-                    ForEach(viewModel.xGData) { data in
-                        HStack(spacing: 16) {
-                            Image(systemName: "soccerball.inverse")
-                                .font(.title2)
-                                .foregroundColor(data.color)
-                            
-                            VStack(alignment: .leading) {
-                                Text(data.equipo)
-                                    .font(.headline)
-                                Text("Probabilidad de gol por jugada")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                            
-                            Spacer()
-                            
-                            Text(String(format: "%.1f xG", data.xG))
-                                .font(.title2.bold())
-                                .foregroundColor(data.color)
-                        }
-                        .padding(.vertical, 8)
-                    }
-                }
-
-                // --- Sección 4: Hallazgos de la IA ---
-                Section(header: Text("Hallazgos de la IA").font(.headline).padding(.leading, -1)) {
-                    HStack(alignment: .top) {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.title)
-                            .foregroundColor(.red)
-                            .padding(.top, 2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                    .padding(.top)
+                    
+                    // 1. GRÁFICA DE EFICIENCIA (Scatter Plot)
+                    // Esto es único y muy "analista pro"
+                    VStack(alignment: .leading) {
+                        Text("EFICIENCIA GOLEADORA")
+                            .font(.headline).bold()
+                        Text("Goles Esperados (xG) vs Goles Reales")
+                            .font(.caption).foregroundColor(.secondary)
                         
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(viewModel.hallazgoTendencia)
-                                .font(.headline)
-                                .foregroundColor(.red)
-                            Text(viewModel.justificacionTendencia)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                        Chart {
+                            ForEach(efficiencyData) { team in
+                                PointMark(
+                                    x: .value("xG", team.xG),
+                                    y: .value("Goles", team.goals)
+                                )
+                                .foregroundStyle(team.color)
+                                .symbolSize(100)
+                                .annotation(position: .overlay) {
+                                    Text(team.name.prefix(3)) // Abreviación (BRA, FRA)
+                                        .font(.system(size: 8, weight: .bold))
+                                        .foregroundColor(.black)
+                                }
+                            }
+                            
+                            // Línea de promedio (quienes estén arriba definen bien)
+                            RuleMark(y: .value("Promedio", 10))
+                                .foregroundStyle(.gray.opacity(0.3))
+                                .lineStyle(StrokeStyle(dash: [5]))
+                        }
+                        .frame(height: 220)
+                        .chartXAxisLabel("Generación de Juego (xG)")
+                        .chartYAxisLabel("Definición (Goles)")
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(20)
+                    }
+                    .padding(.horizontal)
+                    
+                    // 2. TARJETAS DE INSIGHTS GLOBALES
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 15) {
+                            InsightCard(
+                                title: "Muro Defensivo",
+                                value: "Marruecos",
+                                subtitle: "0.2 xG concedidos/partido",
+                                icon: "shield.fill",
+                                color: .red
+                            )
+                            InsightCard(
+                                title: "Rey de la Posesión",
+                                value: "España",
+                                subtitle: "72% promedio",
+                                icon: "figure.soccer",
+                                color: .orange
+                            )
+                            InsightCard(
+                                title: "Más Tarjetas",
+                                value: "Uruguay",
+                                subtitle: "3.5 por partido",
+                                icon: "square.fill.on.square.fill",
+                                color: .yellow
+                            )
+                        }
+                        .padding(.horizontal)
+                    }
+                    
+                    // 3. RANKING DE GOLEO (Golden Boot Race)
+                    VStack(alignment: .leading, spacing: 15) {
+                        Text("CARRERA BOTA DE ORO").font(.headline).bold().padding(.horizontal)
+                        
+                        ForEach(0..<4) { i in
+                            HStack {
+                                Text("\(i+1)").font(.title3).bold().foregroundColor(.secondary).frame(width: 30)
+                                Circle().fill(Color.gray.opacity(0.3)).frame(width: 40, height: 40) // Foto jugador
+                                VStack(alignment: .leading) {
+                                    Text(["Mbappé", "Kane", "Messi", "Santi G."][i]).font(.headline)
+                                    Text(["Francia", "Inglaterra", "Argentina", "México"][i]).font(.caption).foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                Text("\(5-i) Goles").font(.headline).bold().foregroundColor(.primary)
+                            }
+                            .padding(.horizontal)
+                            Divider().padding(.leading, 80)
                         }
                     }
                     .padding(.vertical)
+                    .background(Color(.secondarySystemBackground))
+                    .cornerRadius(20)
+                    .padding(.horizontal)
+                    
+                    Spacer()
                 }
             }
-            .listStyle(.insetGrouped) // Cambio clave para un look moderno
-            .navigationTitle("Análisis ScoreVision")
-            .navigationBarTitleDisplayMode(.large)
+            .background(Color(.systemBackground))
+            .navigationBarHidden(true)
         }
     }
 }
 
-// --- Vista de Previsualización ---
+// Componente Tarjeta Insight
+struct InsightCard: View {
+    let title: String, value: String, subtitle: String, icon: String, color: Color
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Image(systemName: icon).foregroundColor(color)
+                Spacer()
+                Image(systemName: "arrow.up.right").font(.caption).foregroundColor(.secondary)
+            }
+            Text(value).font(.title2).bold()
+            Text(title).font(.caption).fontWeight(.bold).foregroundColor(.secondary)
+            Text(subtitle).font(.caption2).foregroundColor(.gray)
+        }
+        .padding()
+        .frame(width: 160, height: 140)
+        .background(Color(.secondarySystemBackground))
+        .cornerRadius(16)
+        .overlay(RoundedRectangle(cornerRadius: 16).stroke(color.opacity(0.2), lineWidth: 1))
+    }
+}
+
 struct AnalisisView_Previews: PreviewProvider {
     static var previews: some View {
-        AnalisisView()
-            .preferredColorScheme(.dark) // Vista previa en modo oscuro
+        AnalisisView().preferredColorScheme(.dark)
     }
 }
