@@ -1,6 +1,7 @@
 import SwiftUI
 import Charts
-import Lottie // 1. IMPORTANTE: Importar la librería (requiere agregar el paquete airbnb/lottie-ios)
+import Lottie
+import Kingfisher // 1. IMPORTANTE: Importamos Kingfisher para gestión de imágenes
 
 struct DetallePartidoView: View {
     // Recibimos el modelo real
@@ -32,7 +33,7 @@ struct DetallePartidoView: View {
                     }
                     
                     Spacer()
-                    Text(partido.estadio.uppercased()) // Nombre del estadio dinámico
+                    Text(partido.estadio.uppercased())
                         .font(.caption)
                         .fontWeight(.black)
                         .tracking(2)
@@ -41,7 +42,6 @@ struct DetallePartidoView: View {
                     Spacer()
                     
                     Button(action: {
-                        // Demo: Al pulsar compartir activamos la celebración
                         withAnimation { mostrarCelebracion.toggle() }
                     }) {
                         Image(systemName: "square.and.arrow.up")
@@ -57,10 +57,10 @@ struct DetallePartidoView: View {
                 
                 ScrollView {
                     VStack(spacing: 24) {
-                        // 3. Marcador Dinámico
+                        // 3. Marcador Dinámico con Kingfisher
                         MarcadorDinamicoView(partido: partido)
                         
-                        // 4. Pestañas (Pasamos el namespace para la animación)
+                        // 4. Pestañas
                         TabsView(seleccion: $tabSeleccionada, animation: animation)
                         
                         // 5. Contenido Cambiante
@@ -69,7 +69,6 @@ struct DetallePartidoView: View {
                         } else if tabSeleccionada == "IA Vision" {
                             IAVisionView(prediccion: partido.prediccionIA)
                         } else {
-                            // Ejemplo de uso de Lottie para estado "Cargando" o "Construcción"
                             VStack {
                                 LottieView(filename: "loading_animation", loopMode: .loop)
                                     .frame(width: 150, height: 150)
@@ -107,13 +106,12 @@ struct DetallePartidoView: View {
                 }
             }
             
-            // OVERLAY: Animación de Celebración (Confeti)
+            // OVERLAY: Animación de Celebración
             if mostrarCelebracion {
                 LottieView(filename: "confetti", loopMode: .playOnce)
                     .ignoresSafeArea()
-                    .allowsHitTesting(false) // Permite tocar los botones de abajo aunque esté la animación
+                    .allowsHitTesting(false)
                     .onAppear {
-                        // Ocultar automáticamente después de 3 segundos
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                             mostrarCelebracion = false
                         }
@@ -134,7 +132,6 @@ struct MarcadorDinamicoView: View {
             // Tiempo / Estado
             HStack(spacing: 4) {
                 if partido.estado == .enVivo {
-                    // Podrías reemplazar este círculo con un Lottie "live_pulse.json"
                     Circle().fill(Color.green).frame(width: 8, height: 8)
                     Text("EN VIVO • \(partido.fecha)")
                         .font(.caption).fontWeight(.bold).foregroundColor(.green)
@@ -147,7 +144,7 @@ struct MarcadorDinamicoView: View {
             
             HStack(alignment: .center) {
                 // Local
-                EquipoColumn(nombre: partido.equipoLocal.nombre, imagen: partido.equipoLocal.nombre.lowercased())
+                EquipoColumn(nombre: partido.equipoLocal.nombre)
                 
                 // Marcador Central
                 if let local = partido.marcadorLocal, let visita = partido.marcadorVisitante {
@@ -163,7 +160,7 @@ struct MarcadorDinamicoView: View {
                 }
                 
                 // Visitante
-                EquipoColumn(nombre: partido.equipoVisitante.nombre, imagen: partido.equipoVisitante.nombre.lowercased())
+                EquipoColumn(nombre: partido.equipoVisitante.nombre)
             }
         }
     }
@@ -171,7 +168,14 @@ struct MarcadorDinamicoView: View {
 
 struct EquipoColumn: View {
     let nombre: String
-    let imagen: String
+    
+    // Generamos una URL simulada basada en el nombre para la demo
+    // En producción usarías: URL(string: equipo.urlBandera)
+    var urlSimulada: URL? {
+        // Usamos ui-avatars para generar un escudo con las iniciales y colores aleatorios
+        let formattedName = nombre.replacingOccurrences(of: " ", with: "+")
+        return URL(string: "https://ui-avatars.com/api/?name=\(formattedName)&background=random&color=fff&size=128&rounded=true&bold=true")
+    }
     
     var body: some View {
         VStack(spacing: 8) {
@@ -179,12 +183,19 @@ struct EquipoColumn: View {
                 Circle()
                     .stroke(Color.gray.opacity(0.3), lineWidth: 4)
                     .frame(width: 80, height: 80)
-                // Usamos la misma lógica de imagen que en tu PartidosView
-                Image(imagen)
+                
+                // --- IMPLEMENTACIÓN DE KINGFISHER ---
+                KFImage(urlSimulada)
+                    .placeholder {
+                        // Lo que se muestra mientras carga
+                        ProgressView()
+                            .tint(.white)
+                    }
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 45) // Ajustado para banderas rectangulares
-                    .clipShape(RoundedRectangle(cornerRadius: 4))
+                    .frame(width: 45)
+                    .clipShape(Circle()) // Forzamos forma circular
+                    .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
             }
             Text(nombre)
                 .font(.headline)
@@ -249,10 +260,14 @@ struct ResumenDinamicoView: View {
                         .font(.caption).bold().foregroundColor(.gray).padding(.horizontal)
                     
                     ForEach(partido.prediccionIA.topGoleadoresEstimados) { jugador in
+                        // Generamos URL de foto de jugador simulada
+                        let playerUrl = URL(string: "https://ui-avatars.com/api/?name=\(jugador.nombre.replacingOccurrences(of: " ", with: "+"))&background=22c55e&color=fff&size=64&rounded=true")
+                        
                         EventoRow(
                             minuto: "IA",
                             texto: "Alta probabilidad de gol: \(jugador.nombre) (\(Int(jugador.probabilidadGol * 100))%)",
-                            tipo: .info
+                            tipo: .info,
+                            imageUrl: playerUrl // Pasamos la URL a la fila
                         )
                     }
                 }
@@ -323,9 +338,9 @@ struct IAVisionView: View {
 
 struct TabsView: View {
     @Binding var seleccion: String
-    var animation: Namespace.ID // Para animar la linea debajo
+    var animation: Namespace.ID
     
-    let tabs = ["Resumen", "Alineación", "Stats", "IA Vision"]
+    let tabs = ["Resumen", "Alineación", "Estadísticas", "IA Vision"]
     
     var body: some View {
         HStack(spacing: 0) {
@@ -377,6 +392,7 @@ struct EventoRow: View {
     let minuto: String
     let texto: String
     let tipo: TipoEvento
+    var imageUrl: URL? = nil // Nuevo parámetro opcional para la imagen
     
     enum TipoEvento { case gol, tarjeta, info }
     
@@ -389,10 +405,21 @@ struct EventoRow: View {
                 .padding(.top, 4)
             
             VStack(alignment: .leading) {
-                Text(texto)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundColor(.white)
+                HStack {
+                    // Si hay URL, mostramos la imagen con Kingfisher
+                    if let url = imageUrl {
+                        KFImage(url)
+                            .resizable()
+                            .placeholder { Circle().fill(Color.gray.opacity(0.3)) }
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 24, height: 24)
+                            .clipShape(Circle())
+                    }
+                    Text(texto)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
+                }
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -427,16 +454,13 @@ struct LottieView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
-        // Limpiamos vistas previas para evitar duplicados al redibujar
         uiView.subviews.forEach({ $0.removeFromSuperview() })
         
-        // Configuramos la animación
         let animationView = LottieAnimationView(name: filename)
         animationView.contentMode = contentMode
         animationView.loopMode = loopMode
         animationView.play()
         
-        // Auto-layout
         animationView.translatesAutoresizingMaskIntoConstraints = false
         uiView.addSubview(animationView)
         
